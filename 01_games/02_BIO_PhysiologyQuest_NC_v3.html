@@ -17909,32 +17909,59 @@ if(document.readyState==='loading'){
 })();
 </script>
 <script id="ng-backbtn">
-/* Universal "Back to Map" button. Returns to the launcher the player came from
-   (hub list or campus overworld) via history; falls back to the hub. */
+/* Universal, collision-aware "Back to Map" button. Auto-positions to a clear
+   corner so it never covers in-game controls; re-checks on an interval. */
 (function(){
   if(window.__ngBack) return; window.__ngBack=true;
+  var a;
+  function mkStyle(){return 'position:fixed;z-index:2147483646;'
+    +'font-family:"Press Start 2P",VT323,monospace,sans-serif;font-size:9px;'
+    +'letter-spacing:1px;color:#f4c45a;background:rgba(10,16,32,.92);'
+    +'border:1.5px solid #f4c45a;border-radius:8px;padding:7px 10px;'
+    +'text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.6);opacity:.82;'
+    +'line-height:1;white-space:nowrap;-webkit-tap-highlight-color:transparent';}
+  var CORNERS=[
+    {k:'tl',set:function(){a.style.top='8px';a.style.left='8px';a.style.bottom='';a.style.right='';},pt:function(){return [44,18];}},
+    {k:'bl',set:function(){a.style.bottom='12px';a.style.left='10px';a.style.top='';a.style.right='';},pt:function(){return [44,(window.innerHeight||600)-18];}},
+    {k:'br',set:function(){a.style.bottom='12px';a.style.right='10px';a.style.top='';a.style.left='';},pt:function(){return [(window.innerWidth||800)-44,(window.innerHeight||600)-18];}},
+    {k:'tr',set:function(){a.style.top='8px';a.style.right='10px';a.style.bottom='';a.style.left='';},pt:function(){return [(window.innerWidth||800)-44,18];}}
+  ];
+  function blocked(x,y){
+    var els=document.elementsFromPoint(x,y);
+    for(var i=0;i<els.length;i++){ var e=els[i]; if(e===a||(a&&a.contains(e))) continue;
+      for(var p=e,d=0;p&&p!==document.body&&d<6;p=p.parentElement,d++){
+        var t=p.tagName;
+        if(t==='BUTTON'||t==='A'||t==='SELECT'||t==='INPUT'||t==='TEXTAREA') return true;
+        if(p.getAttribute&&(p.getAttribute('onclick')||p.getAttribute('role')==='button')) return true;
+      }
+      return false;
+    }
+    return false;
+  }
+  function place(){
+    try{
+      if(!a) return;
+      var curK=a.dataset.k, i, p;
+      for(i=0;i<CORNERS.length;i++){ if(CORNERS[i].k===curK){ p=CORNERS[i].pt(); if(!blocked(p[0],p[1])) return; } }
+      for(i=0;i<CORNERS.length;i++){ p=CORNERS[i].pt(); if(!blocked(p[0],p[1])){ CORNERS[i].set(); a.dataset.k=CORNERS[i].k; return; } }
+      CORNERS[0].set(); a.dataset.k='tl';
+    }catch(e){}
+  }
   function build(){
     if(document.getElementById('ng-back-btn')) return;
-    var a=document.createElement('a');
-    a.id='ng-back-btn';
-    a.href='../02_hub/index.html';
-    a.title='Back to the campus map';
-    a.innerHTML='\uD83D\uDDFA\uFE0F Map';
-    a.setAttribute('style','position:fixed;top:8px;left:8px;z-index:2147483646;'
-      +'font-family:\'Press Start 2P\',VT323,monospace,sans-serif;font-size:9px;'
-      +'letter-spacing:1px;color:#f4c45a;background:rgba(10,16,32,.92);'
-      +'border:1.5px solid #f4c45a;border-radius:8px;padding:7px 10px;'
-      +'text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.6);opacity:.82;'
-      +'line-height:1;white-space:nowrap;-webkit-tap-highlight-color:transparent');
+    a=document.createElement('a'); a.id='ng-back-btn'; a.href='../02_hub/index.html';
+    a.title='Back to the campus map'; a.innerHTML='\uD83D\uDDFA\uFE0F Map';
+    a.setAttribute('style',mkStyle());
+    var INIT='tl'; a.dataset.k=INIT;
+    var ic=CORNERS.filter(function(c){return c.k===INIT;})[0]||CORNERS[0]; ic.set();
     a.addEventListener('mouseenter',function(){a.style.opacity='1';});
     a.addEventListener('mouseleave',function(){a.style.opacity='.82';});
-    a.addEventListener('click',function(ev){
-      ev.preventDefault();
+    a.addEventListener('click',function(ev){ ev.preventDefault();
       var ref=document.referrer||'';
       if(history.length>1 && /02_hub\/(index|beacon_general_overworld)\.html/.test(ref)){ history.back(); }
-      else { location.href=a.getAttribute('href'); }
-    });
+      else { location.href=a.getAttribute('href'); } });
     document.body.appendChild(a);
+    place(); setInterval(place,1200);
   }
   if(document.body) build(); else document.addEventListener('DOMContentLoaded', build);
 })();
