@@ -1,0 +1,63 @@
+# Internal-only — never publish.
+
+# Internal compliance / provenance documents — administrative, not student-facing.
+03_docs/
+05_buildout/
+
+# Source assets (copyright) + old iterations
+04_source/
+99_archive/
+
+# Redundant byte-identical duplicate hub
+02_hub/NightingaleCampusHub_v3.html
+
+# Legacy overworld — broken links + wrong course codes; replaced by
+# 02_hub/beacon_general_overworld.html (catalog-driven)
+02_hub/campus_Nightingale_v3.html
+
+# Dev tooling / scratch
+_fx_obs.py
+_fx_rpg.py
+_rename.py
+_ngfx_core.txt
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# PDF text-extraction helper (dev)
+_pdftext.py
+_wk8_extracted.txt
+
+# flashcard generator (dev)
+_mkcards.py
+
+# voice-shim injector (dev)
+_voicefix.py
+
+# voice-picker injector (dev)
+_voicepicker.py
+
+# identity cleaner (dev)
+_spartan_clean.py
+_atmosphere.py
+_bonuslab.py
+
+# ── Public-build hardening ──
+# Catch-all: every root-level dev/scratch file starts with "_" (injectors,
+# telemetry, scrubbers, scratch text). None of the published files do.
+/_*
+
+# Public-build manifest names other colleges + the Provost — internal only.
+PUBLIC_BUILD.md
+
+# Internal project README (names internal folders / provenance). The public
+# README.md is a separate, clean file that IS published.
+README_internal.md
+
+# Faculty work ledger, if ever copied in — never publish.
+*WorkLedger*
+*Work_Ledger*
+
+# Local preview-server config (machine paths) — never publish
+.claude/

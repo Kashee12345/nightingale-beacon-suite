@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1b3a">
+<title>Nightingale Beacon Suite v3 — Developer Launcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+<script src="catalog.js"></script>
+<style>
+  :root{
+    --bg1:#070b1c; --bg2:#0e1b3a; --panel:#152144; --panel2:#1d2a5a;
+    --accent:#f4c45a; --hot:#ff8c42; --good:#7ed85a; --line:#3d4a8f;
+    --bio:#7ed85a; --mat:#5ec8ff; --eng:#f4c45a; --com:#ff8c42;
+    --psy:#9b4dff; --soc:#5ec8ff; --hum:#ff5d73;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;min-height:100%;}
+  body{
+    font-family:'VT323', 'Trebuchet MS', monospace;
+    background:radial-gradient(1200px 800px at 50% -10%, #1a2a5a, var(--bg1));
+    color:#dee5ff;
+    padding:30px 18px 50px;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:1; pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.16) 2px, rgba(0,0,0,.16) 3px);
+    mix-blend-mode:multiply;
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:2; pointer-events:none;
+    background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%);
+  }
+  .wrap{ max-width:1100px; margin:0 auto; position:relative; z-index:3; }
+  header{ text-align:center; margin-bottom:30px; }
+  .brand{ font-family:'Press Start 2P',monospace; color:var(--accent); letter-spacing:5px; font-size:11px; margin-bottom:8px; }
+  .lamp{ display:inline-block; font-size:60px; filter:drop-shadow(0 0 18px var(--accent)); animation:flicker 2.4s infinite alternate; margin-bottom:6px; }
+  @keyframes flicker{from{opacity:.85; transform:scale(1);}to{opacity:1; transform:scale(1.07);}}
+  h1{
+    font-family:'Cinzel Decorative',serif;
+    font-size:clamp(34px,5.4vw,58px);
+    background:linear-gradient(180deg,#fff8d4,var(--accent),#d6a020);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin:8px 0 4px; letter-spacing:2px;
+    text-shadow:0 0 30px rgba(244,196,90,.3);
+  }
+  .tag{ font-family:'Press Start 2P',monospace; color:#9aa6e0; letter-spacing:4px; font-size:11px; }
+  .sub{ font-family:'VT323',monospace; color:#9aa6e0; font-size:18px; margin-top:8px; max-width:600px; margin-left:auto; margin-right:auto; }
+  .area{
+    margin:28px 0 12px; padding:8px 14px;
+    background:rgba(14,27,58,0.7); border:1px solid var(--line); border-radius:10px;
+    font-family:'Press Start 2P',monospace; font-size:11px; letter-spacing:3px; color:var(--accent);
+    display:flex; align-items:center; gap:10px;
+  }
+  .area .bar{ flex:1; height:2px; background:linear-gradient(90deg, var(--accent), transparent); }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; }
+  .card{
+    display:block; padding:14px 16px;
+    background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:2px solid var(--line); border-left-width:5px;
+    border-radius:12px;
+    text-decoration:none; color:#dee5ff;
+    transition:transform .15s, border-color .15s, box-shadow .15s;
+    position:relative;
+  }
+  .card:hover{ transform:translateY(-3px); border-color:var(--accent); box-shadow:0 12px 26px -10px rgba(244,196,90,0.4); }
+  .card .num{ font-family:'Press Start 2P',monospace; font-size:9px; letter-spacing:2px; color:var(--accent); margin-bottom:6px; }
+  .card .name{ font-family:'Cinzel Decorative',serif; font-size:20px; color:#fff8d4; margin:2px 0; line-height:1.1; }
+  .card .course{ font-family:'VT323',monospace; font-size:15px; color:#9aa6e0; letter-spacing:1px; }
+  .card.bio{ border-left-color:var(--bio); }
+  .card.mat{ border-left-color:var(--mat); }
+  .card.eng{ border-left-color:var(--eng); }
+  .card.com{ border-left-color:var(--com); }
+  .card.psy{ border-left-color:var(--psy); }
+  .card.soc{ border-left-color:var(--soc); }
+  .card.hum{ border-left-color:var(--hum); }
+  .card.flagship{
+    background:linear-gradient(180deg, #2a1f10, #1a1408);
+    border-left:5px solid var(--accent);
+    box-shadow:0 0 0 1px rgba(244,196,90,0.3);
+  }
+  .card.flagship::after{
+    content:"★ FLAGSHIP"; position:absolute; top:8px; right:10px;
+    font-family:'Press Start 2P',monospace; font-size:8px; letter-spacing:1.5px; color:var(--accent);
+  }
+  .card.flagship .name{ color:var(--accent); }
+  .sectional{
+    margin:32px 0 12px; padding:10px 14px;
+    background:rgba(14,27,58,0.85); border:1px solid var(--accent); border-radius:10px;
+    font-family:'Press Start 2P',monospace; font-size:12px; letter-spacing:3px; color:var(--accent);
+    text-align:center;
+  }
+  footer{
+    margin-top:50px; padding-top:20px; border-top:1px solid var(--line);
+    text-align:center; font-family:'VT323',monospace; color:#9aa6e0; font-size:16px;
+  }
+  footer a{ color:var(--accent); text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+  .pill-row{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
+  .pill{
+    padding:8px 14px; border:1px solid var(--line); border-radius:8px;
+    font-family:'Press Start 2P',monospace; font-size:10px; letter-spacing:2px;
+    color:var(--accent); text-decoration:none;
+    background:rgba(14,27,58,0.7);
+  }
+  .pill:hover{ border-color:var(--accent); color:#fff8d4; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">NIGHTINGALE · BEACON SUITE v3 · DEVELOPER LAUNCHER</div>
+    <div class="lamp">🪔</div>
+    <h1>The Nightingale Suite</h1>
+    <div class="tag">CHANGE LIVES · BEGINNING WITH YOUR OWN</div>
+    <div class="sub">18 NCLEX-style gamified courses across the Nightingale College general-education curriculum. Click any tile to launch.</div>
+  </header>
+
+  <!-- Game tiles render here from catalog.js (single source of truth) -->
+  <div id="ng-areas"></div>
+
+  <div class="sectional">🪔 STUDENT MENUS</div>
+  <div class="grid">
+    <a class="card" href="02_hub/index.html" style="border-left-color:var(--accent);"><div class="num">HUB</div><div class="name">Campus Hub (standardized list)</div><div class="course">02_hub/index.html</div></a>
+    <a class="card" href="02_hub/beacon_general_overworld.html" style="border-left-color:var(--accent);"><div class="num">MAP</div><div class="name">Beacon General (overworld map)</div><div class="course">02_hub/beacon_general_overworld.html</div></a>
+  </div>
+  <!-- Public build: only the two student menus, the 18 games, the study guides, and catalog.js
+       are shipped. Internal project documents and superseded legacy files are excluded. -->
+
+  <footer>
+    <div>18 games · 2 student menus · single-file each · all NC v3 spec</div>
+    <div class="pill-row">
+      <a class="pill" href="README.md">📖 README</a>
+    </div>
+    <div style="margin-top:18px; color:#5a6796; font-size:14px;">Maintained for Dr. Vidya Aggrawal · Nightingale College gamification project</div>
+  </footer>
+
+</div>
+
+<script>
+/* Render game tiles from catalog.js — the single source of truth.
+   Launcher is at the suite root, so item.path is used as-is (rootPrefix=''). */
+(function(){
+  var C = window.NG_CATALOG;
+  var host = document.getElementById('ng-areas');
+  if(!C || !host){ if(host) host.innerHTML = '<div class="area">⚠ catalog.js failed to load <div class="bar"></div></div>'; return; }
+  var n = 0;
+  C.areas.forEach(function(a){
+    var games = C.games().filter(function(g){ return g.area === a.id; });
+    if(!games.length) return;
+    var label = document.createElement('div');
+    label.className = 'area';
+    label.innerHTML = (a.icon ? a.icon + ' ' : '') + a.label.toUpperCase() + ' <div class="bar"></div>';
+    host.appendChild(label);
+    var grid = document.createElement('div');
+    grid.className = 'grid';
+    games.forEach(function(g){
+      n++;
+      var card = document.createElement('a');
+      card.className = 'card' + (g.flagship ? ' flagship' : '');
+      card.href = C.resolve(g.path, '');
+      card.style.borderLeftColor = a.color;
+      var sub = g.subtitle || '';
+      var meta = g.boss ? sub + ' · ' + g.boss : sub;
+      card.innerHTML =
+        '<div class="num">' + (g.code || '') + '</div>' +
+        '<div class="name">' + g.title + '</div>' +
+        '<div class="course">' + meta + '</div>';
+      grid.appendChild(card);
+    });
+    host.appendChild(grid);
+  });
+})();
+</script>
+</body>
+</html>

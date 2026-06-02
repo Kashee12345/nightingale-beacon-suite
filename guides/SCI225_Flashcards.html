@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SCI225 Pathophysiology — Flashcards</title>
+<style>
+  :root{
+    --u1:#1e40af; --u2:#7c3aed; --u3:#c2410c; --u4:#047857; --u5:#b91c1c; --u6:#0e7490;
+    --good:#047857; --again:#b45309; --ink:#111827; --muted:#4b5563; --line:#d1d5db; --bg:#0f172a;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; height:100%;}
+  body{font-family:"Segoe UI",Roboto,Arial,sans-serif; color:var(--ink);
+    background:radial-gradient(1100px 700px at 50% -10%, #1e293b, var(--bg)); min-height:100%;}
+  .wrap{max-width:760px; margin:0 auto; padding:18px 16px 40px;}
+  header{text-align:center; color:#e2e8f0; margin-bottom:14px;}
+  header h1{font-size:22px; margin:4px 0; background:linear-gradient(90deg,#93c5fd,#c4b5fd,#fca5a5);
+    -webkit-background-clip:text; background-clip:text; color:transparent;}
+  header .sub{font-size:13px; color:#94a3b8; letter-spacing:.5px;}
+
+  /* deck picker */
+  .decks{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:14px;}
+  .deck{cursor:pointer; border:none; text-align:left; color:#fff; border-radius:12px; padding:14px 14px;
+    background:#1e293b; border-left:5px solid #64748b; transition:transform .12s, box-shadow .12s;}
+  .deck:hover{transform:translateY(-3px); box-shadow:0 12px 24px -12px rgba(0,0,0,.6);}
+  .deck.ready{border-left-color:var(--u6);}
+  .deck .dt{font-size:16px; font-weight:600;}
+  .deck .dc{font-size:12px; color:#94a3b8; margin-top:4px;}
+  .deck.soon{opacity:.5; cursor:default;}
+  .deck.soon:hover{transform:none; box-shadow:none;}
+
+  /* card stage */
+  #stage{display:none;}
+  .topbar{display:flex; align-items:center; gap:10px; color:#cbd5e1; font-size:13px; margin-bottom:10px;}
+  .topbar .pill{background:#1e293b; border:1px solid #334155; border-radius:8px; padding:5px 9px;}
+  .topbar .spacer{flex:1;}
+  .topbar button{background:#1e293b; color:#cbd5e1; border:1px solid #334155; border-radius:8px; padding:6px 10px; cursor:pointer; font-size:12px;}
+  .topbar button:hover{border-color:#64748b;}
+  .bar{height:7px; background:#1e293b; border:1px solid #334155; border-radius:5px; overflow:hidden; margin-bottom:14px;}
+  .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--good),#34d399); transition:width .3s;}
+
+  .card{perspective:1600px; height:360px; margin-bottom:14px;}
+  .inner{position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.2,.8,.3,1); transform-style:preserve-3d; cursor:pointer;}
+  .inner.flip{transform:rotateY(180deg);}
+  .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:26px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.08);}
+  .front{background:linear-gradient(160deg,#ffffff,#f1f5f9);}
+  .back{background:linear-gradient(160deg,#ecfdf5,#d1fae5); transform:rotateY(180deg);}
+  .face .tag{position:absolute; top:14px; left:16px; font-size:10px; letter-spacing:2px; font-weight:700; color:var(--muted);}
+  .front .tag{color:#1d4ed8;} .back .tag{color:var(--good);}
+  .face .q{font-size:21px; line-height:1.4; font-weight:600;}
+  .back .q{font-size:19px; font-weight:500; color:#064e3b;}
+  .hint{position:absolute; bottom:14px; font-size:11px; color:#94a3b8;}
+
+  .actions{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .actions button{border:none; border-radius:12px; padding:14px; font-size:15px; font-weight:700; cursor:pointer; color:#fff;}
+  .again{background:var(--again);} .good{background:var(--good);}
+  .actions button:active{transform:translateY(1px);}
+  .actions.hidden{visibility:hidden;}
+  .flipbtn{display:block; width:100%; border:none; border-radius:12px; padding:14px; font-size:15px; font-weight:700; cursor:pointer; color:#fff; background:#1d4ed8;}
+
+  /* done */
+  #done{display:none; text-align:center; color:#e2e8f0; padding:30px 10px;}
+  #done .score{font-size:54px; font-weight:800; color:#34d399;}
+  #done h2{margin:6px 0;}
+  #done button{margin:8px 6px; border:none; border-radius:10px; padding:12px 18px; font-weight:700; cursor:pointer;}
+  #done .pri{background:#1d4ed8; color:#fff;} #done .sec{background:#1e293b; color:#cbd5e1; border:1px solid #334155;}
+  .foot{margin-top:18px; text-align:center; color:#64748b; font-size:12px;}
+  a.back-link{color:#94a3b8; text-decoration:none; font-size:13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back-link" href="#" onclick="history.length>1?history.back():null;return false;">‹ back</a>
+    <h1>SCI 225 — Pathophysiology Flashcards</h1>
+    <div class="sub" id="subhead">Active recall · spaced repetition · by Dr. Vidya Aggrawal</div>
+  </header>
+
+  <div id="picker">
+    <div class="decks" id="decks"></div>
+    <div class="foot">Tip: tap a card or press <b>Space</b> to flip · <b>1</b> = Again · <b>2</b> = Got it</div>
+  </div>
+
+  <div id="stage">
+    <div class="topbar">
+      <span class="pill" id="t-deck">Week</span>
+      <span class="pill" id="t-count">0 / 0</span>
+      <span class="spacer"></span>
+      <button id="shuffleBtn">⤮ Shuffle</button>
+      <button id="exitBtn">✕ Decks</button>
+    </div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="card"><div class="inner" id="inner">
+      <div class="face front"><div class="tag">PROMPT</div><div class="q" id="front"></div><div class="hint">tap / Space to flip</div></div>
+      <div class="face back"><div class="tag">ANSWER</div><div class="q" id="back"></div><div class="hint">1 = Again · 2 = Got it</div></div>
+    </div></div>
+    <button class="flipbtn" id="flipBtn">Flip card</button>
+    <div class="actions hidden" id="actions">
+      <button class="again" id="againBtn">↺ Again</button>
+      <button class="good" id="goodBtn">✓ Got it</button>
+    </div>
+  </div>
+
+  <div id="done">
+    <div class="score" id="doneScore">100%</div>
+    <h2 id="doneTitle">Deck complete!</h2>
+    <p id="doneSub" style="color:#94a3b8"></p>
+    <button class="pri" id="againDeck">Study again</button>
+    <button class="sec" id="missedBtn">Review missed only</button>
+    <button class="sec" id="backDecks">Pick another deck</button>
+  </div>
+</div>
+
+<script src="SCI225_Flashcard_Decks.js"></script>
+<script>
+/* ============================================================
+   DECKS — one entry per week. Add a week by pasting {q,a} cards.
+   Cumulative/Midterm deck can be added later (mix multiple weeks).
+   ============================================================ */
+var DECKS = {
+  wk8: {
+    title: "Week 8 — Hematology",
+    cards: [
+      {q:"Normal hemoglobin (male / female)?", a:"Male 13.5–17.5 g/dL · Female 12–15.5 g/dL"},
+      {q:"MCV &lt;80 vs &gt;100 — what do they mean?", a:"&lt;80 = microcytic (small) · &gt;100 = macrocytic (large). Reading MCV first splits every anemia differential."},
+      {q:"Which anemias are MICROcytic?", a:"Iron deficiency, anemia of chronic disease, lead, thalassemia"},
+      {q:"Which anemias are MACROcytic?", a:"B12 deficiency and folate deficiency (both impair DNA synthesis)"},
+      {q:"Key difference: B12 vs folate deficiency?", a:"B12 has NEURO symptoms (paresthesia, ataxia — B12 makes myelin). Folate does not."},
+      {q:"Iron-deficiency RBC morphology?", a:"Microcytic, hypochromic (small and pale — can't make heme)"},
+      {q:"Anemia of chronic disease — iron stores?", a:"NORMAL or HIGH. Iron is locked in macrophages by hepcidin (driven by IL-6). Treat the inflammation, not with iron."},
+      {q:"What does hepcidin do?", a:"Locks iron inside macrophages + blocks gut absorption — the hormone of anemia of chronic disease."},
+      {q:"Hemolytic anemia lab signature?", a:"↑ indirect (unconjugated) bilirubin + ↑ LDH + ↓ haptoglobin + ↑ reticulocytes; anemia + jaundice"},
+      {q:"Where is erythropoietin (EPO) made, and what triggers it?", a:"Kidneys — released when they sense hypoxia → drives marrow to make RBCs."},
+      {q:"A HIGH reticulocyte count in anemia tells you…?", a:"The marrow is responding appropriately (ramping up RBC production). Low retics in anemia = marrow failing."},
+      {q:"Anemia compensations (think tissue O₂)?", a:"↑ heart rate / cardiac output, ↑ respiratory rate, ↑ EPO → erythropoiesis, and RIGHT shift of the O₂-Hgb curve (more O₂ unloaded)."},
+      {q:"Bleeding pattern: PLATELET problem?", a:"Mucocutaneous — petechiae, ecchymoses, gum/nose bleeding, prolonged bleeding from minor cuts."},
+      {q:"Bleeding pattern: COAGULATION FACTOR problem (e.g., hemophilia)?", a:"Deep bleeding — hemarthroses (joint bleeds), intramuscular hematomas, delayed bleeding."},
+      {q:"Platelet count thresholds — when is bleeding serious / life-threatening?", a:"Spontaneous bleeding rare &gt;50k; serious risk &lt;20k; life-threatening &lt;10k. (Normal 150–400k)."},
+      {q:"Why does polycythemia raise thrombosis risk?", a:"↑ Hct → ↑ blood viscosity → slower flow + more platelet aggregation → strokes, MIs, DVT/PE. Treat with phlebotomy."},
+      {q:"Virchow's triad (3 drivers of thrombosis)?", a:"Endothelial injury · Stasis (immobility) · Hypercoagulability"},
+      {q:"Most common cause of neutropenia?", a:"Chemotherapy — neutrophil nadir typically 7–14 days after the dose."},
+      {q:"Neutropenic fever — what's the management rule?", a:"Immediate broad-spectrum IV antibiotics — do NOT wait for culture results. Fever may be the only sign."},
+      {q:"Why do leukemia patients get infections even with a high WBC count?", a:"The cells are blasts — immature & nonfunctional. Functionally leukopenic; marrow also crowds out normal cells."},
+      {q:"Leukemia quick ID: ALL / AML / CML / CLL?", a:"ALL = children 2–5 (most common peds cancer) · AML = Auer rods · CML = Philadelphia chromosome t(9;22), BCR-ABL · CLL = older adults, smudge cells"},
+      {q:"Sickle cell disease — inheritance & defect?", a:"Autosomal recessive β-globin mutation → HbS, which polymerizes under stress and sickles RBCs."},
+      {q:"Sickle cell crisis triggers?", a:"Cold, Hypoxia, Acidosis, Dehydration, Stress, Infection. Treat acutely: hydration, oxygen, pain control."},
+      {q:"Drug that prevents sickle cell crises — and how?", a:"Hydroxyurea — raises fetal hemoglobin (HbF), which doesn't sickle."},
+      {q:"Newborn jaundice WITHIN 24 hours means…?", a:"Pathologic — active hemolysis (HDN, ABO incompatibility, G6PD, sepsis). Physiologic jaundice appears AFTER 24 h."},
+      {q:"How is hemolytic disease of the newborn prevented?", a:"RhoGAM (anti-D Ig) to Rh-NEGATIVE mothers at 28 weeks and within 72 h of delivery."},
+      {q:"Anemia of prematurity — why?", a:"Low neonatal EPO (immature kidney) + shortened RBC lifespan + frequent blood draws + rapid growth diluting Hgb."},
+      {q:"Lead exposure causes what kind of anemia?", a:"Microcytic — it inhibits heme-synthesis enzymes; basophilic stippling on smear; neurotoxic in children."},
+      {q:"Benzene vs radiation — marrow effect?", a:"Both → aplastic anemia / pancytopenia (radiation also leukemia; benzene also leukemia)."},
+      {q:"High-altitude hematologic adaptation?", a:"Hypoxia → ↑ EPO → secondary 'appropriate' polycythemia (↑ Hct). Improves O₂ delivery but raises viscosity/clot risk."}
+    ]
+  }
+  /* To add a week:  wk9: { title:"Week 9 — Cardiovascular", cards:[ {q:"...",a:"..."}, ... ] }  */
+};
+/* merge in the auto-generated weekly decks (from each guide's missteps + mnemonics + quick-ref) */
+if(window.GEN_DECKS){ for(var _k in window.GEN_DECKS){ if(!DECKS[_k]) DECKS[_k]=window.GEN_DECKS[_k]; } }
+var DECK_ORDER = ["wk1","wk2","wk3","wk4","wk5","wk6","wk8","wk9"];
+var DECK_NAMES = {wk1:"Week 1 — Genetics & Cell Biology",wk2:"Week 2 — Immunity & Hypersensitivity",wk3:"Week 3 — Oncology",wk4:"Week 4 — Neurologic Function",wk5:"Week 5 — CNS/PNS, NMJ & Peds Neuro",wk6:"Week 6 — Endocrine",wk8:"Week 8 — Hematology",wk9:"Week 9 — Cardiovascular"};
+
+/* ---------- picker ---------- */
+var pickerEl=document.getElementById('decks');
+function renderPicker(){
+  var html='';
+  DECK_ORDER.forEach(function(id){
+    var ready = DECKS[id] && DECKS[id].cards && DECKS[id].cards.length;
+    if(ready){
+      html+='<button class="deck ready" data-deck="'+id+'"><div class="dt">'+DECK_NAMES[id]+'</div><div class="dc">'+DECKS[id].cards.length+' cards · tap to study</div></button>';
+    } else {
+      html+='<div class="deck soon"><div class="dt">'+DECK_NAMES[id]+'</div><div class="dc">deck coming soon</div></div>';
+    }
+  });
+  pickerEl.innerHTML=html;
+  Array.prototype.forEach.call(document.querySelectorAll('#decks [data-deck]'),function(b){
+    b.addEventListener('click',function(){ startDeck(b.getAttribute('data-deck')); });
+  });
+}
+
+/* ---------- study session (spaced-rep-lite) ---------- */
+var cur=null, queue=[], idx=0, total=0, missed=[], flipped=false, knownThisRound=0;
+function startDeck(id, onlyCards){
+  cur=id;
+  var base = onlyCards || DECKS[id].cards.slice();
+  queue = base.slice(); shuffle(queue);
+  idx=0; total=queue.length; missed=[]; knownThisRound=0;
+  document.getElementById('picker').style.display='none';
+  document.getElementById('done').style.display='none';
+  document.getElementById('stage').style.display='block';
+  document.getElementById('t-deck').textContent=DECK_NAMES[id];
+  showCard();
+}
+function showCard(){
+  if(idx>=queue.length){ return finish(); }
+  flipped=false;
+  var c=queue[idx];
+  document.getElementById('inner').classList.remove('flip');
+  document.getElementById('front').innerHTML=c.q;
+  document.getElementById('back').innerHTML=c.a;
+  document.getElementById('flipBtn').style.display='block';
+  document.getElementById('actions').classList.add('hidden');
+  document.getElementById('t-count').textContent=(knownThisRound)+' / '+total+' mastered';
+  document.getElementById('prog').style.width=Math.round(knownThisRound/total*100)+'%';
+}
+function flip(){
+  flipped=!flipped;
+  document.getElementById('inner').classList.toggle('flip',flipped);
+  if(flipped){ document.getElementById('flipBtn').style.display='none'; document.getElementById('actions').classList.remove('hidden'); }
+  else { document.getElementById('flipBtn').style.display='block'; document.getElementById('actions').classList.add('hidden'); }
+}
+function grade(ok){
+  var c=queue[idx];
+  if(ok){ knownThisRound++; }
+  else { if(missed.indexOf(c)<0) missed.push(c); queue.splice(idx+1+Math.min(4,queue.length-idx-1),0,c); /* re-show soon */ }
+  idx++; showCard();
+}
+function finish(){
+  document.getElementById('stage').style.display='none';
+  var pct = total? Math.round((total-missed.length)/total*100):100;
+  document.getElementById('doneScore').textContent=pct+'%';
+  document.getElementById('doneTitle').textContent = missed.length? 'Nice work — review the tricky ones' : 'Perfect round! 🎉';
+  document.getElementById('doneSub').textContent = (total-missed.length)+' of '+total+' cards first-try · '+missed.length+' to review';
+  document.getElementById('missedBtn').style.display = missed.length? 'inline-block':'none';
+  document.getElementById('done').style.display='block';
+  try{ var k='ng_flash_'+cur; localStorage.setItem(k, JSON.stringify({pct:pct, ts:Date.now()})); }catch(e){}
+}
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } }
+
+/* ---------- wiring ---------- */
+document.getElementById('inner').addEventListener('click',flip);
+document.getElementById('flipBtn').addEventListener('click',flip);
+document.getElementById('againBtn').addEventListener('click',function(){ grade(false); });
+document.getElementById('goodBtn').addEventListener('click',function(){ grade(true); });
+document.getElementById('shuffleBtn').addEventListener('click',function(){ shuffle(queue); idx=Math.max(0,idx); showCard(); });
+document.getElementById('exitBtn').addEventListener('click',toPicker);
+document.getElementById('backDecks').addEventListener('click',toPicker);
+document.getElementById('againDeck').addEventListener('click',function(){ startDeck(cur); });
+document.getElementById('missedBtn').addEventListener('click',function(){ startDeck(cur, missed.slice()); });
+function toPicker(){ document.getElementById('stage').style.display='none'; document.getElementById('done').style.display='none'; document.getElementById('picker').style.display='block'; renderPicker(); }
+window.addEventListener('keydown',function(e){
+  if(document.getElementById('stage').style.display!=='block') return;
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flip(); }
+  else if(flipped && (e.key==='1')){ grade(false); }
+  else if(flipped && (e.key==='2')){ grade(true); }
+  else if(e.key==='ArrowRight' && flipped){ grade(true); }
+});
+// swipe (mobile): tap flips; swipe right = got it, left = again (when flipped)
+var tx=0;
+document.getElementById('card');
+document.querySelector('.card').addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; },{passive:true});
+document.querySelector('.card').addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-tx;
+  if(flipped && Math.abs(dx)>60){ grade(dx>0); } },{passive:true});
+
+/* deep-link: ?deck=wk8 jumps straight in */
+(function(){
+  renderPicker();
+  var m=/[?&]deck=([a-z0-9]+)/i.exec(location.search);
+  if(m && DECKS[m[1]] && DECKS[m[1]].cards){ startDeck(m[1]); }
+})();
+</script>
+</body>
+</html>

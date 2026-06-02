@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1b3a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>⚜ Nightingale Beacon Suite · v3 Campus Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Cinzel+Decorative:wght@700;900&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<script src="../catalog.js"></script>
+<style>
+:root {
+  --ng-lamp-gold: #f4c45a;
+  --ng-lamp-bright: #ffd97a;
+  --ng-night-blue: #0e1b3a;
+  --ng-night-deep: #06102a;
+  --ng-flame-orange: #ff8c42;
+  --ng-flame-red: #e85a30;
+  --ng-text: #f4f1e8;
+  --ng-text-dim: #9aaab8;
+  --ng-success: #88c878;
+  --ng-error: #e84960;
+  --ng-rare: #5ec8ff;
+  --ng-legendary: #f4c45a;
+  --ng-font-pixel: 'Press Start 2P', monospace;
+  --ng-font-read:  'VT323', monospace;
+  --ng-font-disp:  'Cinzel Decorative', serif;
+  --ng-font-clinical: 'Source Serif 4', Georgia, serif;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { height:100%; overflow:hidden; }
+body {
+  background: radial-gradient(ellipse at 50% 30%, #122145 0%, var(--ng-night-blue) 45%, var(--ng-night-deep) 100%);
+  color: var(--ng-text);
+  font-family: var(--ng-font-read);
+  position:relative;
+  width:100vw; height:100vh;
+}
+/* CRT scanlines + vignette */
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9990;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,0.08) 2px 3px);
+}
+body::after {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9991;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
+}
+
+/* ═══ ANIMATED AURORA BACKGROUND ═══ */
+.aurora {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+}
+.aurora-blob {
+  position:absolute; width:60vw; height:60vw; border-radius:50%;
+  filter: blur(80px); opacity:.32; mix-blend-mode:screen;
+  animation: aurora-drift 24s ease-in-out infinite;
+}
+.aurora-blob:nth-child(1) { background:radial-gradient(circle, #5ec8ff 0%, transparent 70%); top:-15vw; left:-10vw; animation-delay:0s; }
+.aurora-blob:nth-child(2) { background:radial-gradient(circle, #f4c45a 0%, transparent 70%); top:20vw; right:-15vw; animation-delay:-8s; }
+.aurora-blob:nth-child(3) { background:radial-gradient(circle, #ff8c42 0%, transparent 70%); bottom:-15vw; left:30vw; animation-delay:-16s; }
+@keyframes aurora-drift {
+  0%,100% { transform:translate(0,0) scale(1); }
+  33% { transform:translate(8vw,-4vw) scale(1.1); }
+  66% { transform:translate(-6vw,5vw) scale(.9); }
+}
+
+/* ═══ STARFIELD ═══ */
+.star {
+  position:absolute; width:2px; height:2px; background:#fff; border-radius:50%;
+  pointer-events:none; opacity:0; animation: star-twinkle 4s ease-in-out infinite;
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity:0; }
+  50% { opacity:.8; box-shadow:0 0 4px #fff; }
+}
+
+/* ═══ TITLE BANNER ═══ */
+#title-banner {
+  position:absolute; top:18px; left:50%; transform:translateX(-50%);
+  text-align:center; z-index:10; pointer-events:none;
+  animation: title-fade-in 1.6s ease-out;
+}
+@keyframes title-fade-in {
+  from { opacity:0; transform:translateX(-50%) translateY(-30px); filter:blur(8px); }
+  to { opacity:1; transform:translateX(-50%) translateY(0); filter:blur(0); }
+}
+#title-banner h1 {
+  font-family: var(--ng-font-disp);
+  font-size: clamp(28px, 5vw, 56px);
+  color: var(--ng-lamp-gold);
+  letter-spacing:2px;
+  text-shadow: 0 0 24px rgba(244,196,90,.5), 0 0 4px rgba(244,196,90,.9), 0 4px 8px rgba(0,0,0,.7);
+  font-weight:900;
+}
+#title-banner .tagline {
+  font-family: var(--ng-font-read);
+  font-size: clamp(14px, 1.8vw, 20px);
+  color: var(--ng-text);
+  letter-spacing:3px;
+  margin-top:2px;
+  opacity:.85;
+  font-style:italic;
+}
+#title-banner .divider {
+  height:2px; width:280px; margin:6px auto 0;
+  background: linear-gradient(90deg, transparent 0%, var(--ng-lamp-gold) 50%, transparent 100%);
+  animation: divider-sweep 3s ease-in-out infinite;
+}
+@keyframes divider-sweep {
+  0%,100% { width:100px; opacity:.3; }
+  50% { width:340px; opacity:1; }
+}
+#title-banner .subtitle {
+  font-family: var(--ng-font-pixel);
+  font-size: 10px;
+  color: var(--ng-lamp-gold);
+  letter-spacing:4px;
+  margin-top:6px;
+  opacity:.7;
+}
+
+/* ═══ LAMP CENTERPIECE ═══ */
+#hub-lamp {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  z-index:5; pointer-events:none;
+  animation: lamp-float 6s ease-in-out infinite;
+}
+@keyframes lamp-float {
+  0%,100% { transform:translate(-50%,-50%) translateY(0); }
+  50% { transform:translate(-50%,-50%) translateY(-12px); }
+}
+#hub-lamp svg { filter: drop-shadow(0 0 24px rgba(244,196,90,.6)); }
+
+/* ═══ FLAME ═══ */
+.flame {
+  transform-origin: 50% 100%;
+  animation: flame-flicker .35s ease-in-out infinite alternate;
+}
+@keyframes flame-flicker {
+  from { transform: scale(1,1) skewX(-2deg); opacity:.92; }
+  to   { transform: scale(1.04,1.08) skewX(2deg); opacity:1; }
+}
+
+/* ═══ COURSE NODES (ring around lamp) ═══ */
+.course-node {
+  position:absolute; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center; z-index:8;
+  transition: transform .25s ease, filter .25s ease;
+  text-decoration:none; color:inherit;
+}
+.course-node:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 14px rgba(244,196,90,.8));
+  z-index:20;
+}
+.course-pin {
+  width:42px; height:52px;
+  position:relative;
+}
+.course-pin svg { width:100%; height:100%; filter:drop-shadow(0 4px 6px rgba(0,0,0,.6)); }
+.course-pin.locked { opacity:.45; filter:grayscale(.6) brightness(.6); }
+.course-pin.locked .pin-flame { display:none; }
+.course-label {
+  margin-top:4px;
+  font-family: var(--ng-font-read);
+  font-size:14px;
+  color: var(--ng-text);
+  background: rgba(14,27,58,.85);
+  padding:2px 8px;
+  border-radius:3px;
+  border: 1px solid rgba(244,196,90,.4);
+  white-space:nowrap;
+  letter-spacing:1px;
+}
+.course-code {
+  font-family: var(--ng-font-pixel);
+  font-size:7px;
+  color: var(--ng-lamp-gold);
+  letter-spacing:1px;
+  margin-top:1px;
+  opacity:.85;
+}
+.course-node.locked .course-label { color: var(--ng-text-dim); }
+
+/* ═══ AREA LABELS (5 breadth areas) ═══ */
+.area-label {
+  position:absolute;
+  font-family: var(--ng-font-disp);
+  font-size:14px;
+  color: var(--ng-lamp-gold);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  opacity:.55;
+  pointer-events:none;
+  z-index:4;
+  text-shadow:0 0 8px rgba(244,196,90,.4);
+}
+
+/* ═══ INFO PANEL (right side) ═══ */
+#info-panel {
+  position:absolute; top:120px; right:18px;
+  width: 280px; max-height:calc(100vh - 160px); overflow-y:auto;
+  background: rgba(14,27,58,.85);
+  border:2px solid rgba(244,196,90,.4);
+  border-radius:6px;
+  padding:14px 18px;
+  z-index:30;
+  font-family: var(--ng-font-read);
+  font-size:15px;
+  color: var(--ng-text);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+#info-panel h2 {
+  font-family: var(--ng-font-disp);
+  font-size: 18px;
+  color: var(--ng-lamp-gold);
+  letter-spacing:2px;
+  margin-bottom:6px;
+  border-bottom: 1px solid rgba(244,196,90,.3);
+  padding-bottom:4px;
+}
+#info-panel .info-code {
+  font-family: var(--ng-font-pixel);
+  font-size:9px;
+  letter-spacing:2px;
+  color: var(--ng-rare);
+  margin-bottom:6px;
+}
+#info-panel .info-desc {
+  line-height:1.45; color: var(--ng-text); margin-bottom:8px;
+}
+#info-panel .info-meta {
+  font-size:13px; color: var(--ng-text-dim);
+  border-top:1px solid rgba(244,196,90,.2);
+  padding-top:6px; margin-top:6px;
+}
+#info-panel .launch-btn {
+  display:block; width:100%; margin-top:10px;
+  padding:10px 14px;
+  background: linear-gradient(180deg, var(--ng-lamp-gold) 0%, #d4a44a 100%);
+  color: var(--ng-night-deep);
+  border:none; border-radius:4px;
+  font-family: var(--ng-font-pixel);
+  font-size:11px;
+  letter-spacing:2px;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  font-weight:bold;
+  transition:transform .15s;
+}
+#info-panel .launch-btn:hover { transform:scale(1.03); filter:brightness(1.1); }
+#info-panel .launch-btn:disabled { opacity:.4; cursor:not-allowed; }
+#info-panel.empty {
+  text-align:center; padding:24px 18px; color:var(--ng-text-dim); font-style:italic;
+}
+
+/* ═══ STATS RIBBON (bottom) ═══ */
+#stats-ribbon {
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+  display:flex; gap:18px;
+  background: rgba(14,27,58,.85);
+  border: 1.5px solid rgba(244,196,90,.4);
+  border-radius:6px;
+  padding:8px 18px;
+  z-index:25;
+  font-family: var(--ng-font-read);
+  font-size:14px;
+  backdrop-filter: blur(6px);
+}
+.stat-cell { display:flex; flex-direction:column; align-items:center; min-width:78px; }
+.stat-val { color: var(--ng-lamp-gold); font-size:18px; font-weight:bold; }
+.stat-label { color: var(--ng-text-dim); font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+
+/* ═══ TOP-LEFT BACK / CONTINUITY PATIENT ═══ */
+#patient-pin {
+  position:fixed; top:14px; left:14px; z-index:50;
+  background: rgba(14,27,58,.9);
+  border:2px solid var(--ng-lamp-gold);
+  padding:6px 12px; border-radius:4px;
+  font-family: var(--ng-font-read);
+  font-size:14px;
+  color: var(--ng-text);
+  display:flex; align-items:center; gap:8px;
+  cursor:pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+}
+#patient-pin:hover { background:rgba(244,196,90,.15); }
+#patient-pin .ico { font-size:18px; }
+
+/* ═══ COMPLETION RING (around each pin) ═══ */
+.completion-ring {
+  position:absolute; top:0; left:0; width:42px; height:52px;
+  pointer-events:none;
+}
+.completion-ring circle {
+  fill:none; stroke: var(--ng-success); stroke-width:2; stroke-linecap:round;
+  transform: rotate(-90deg); transform-origin:center;
+}
+
+/* ═══ VISITED STATE (lit pins) ═══ */
+.course-node.visited .course-pin svg path {
+  filter: drop-shadow(0 0 6px var(--ng-lamp-gold));
+}
+.course-node.visited .course-label {
+  color: var(--ng-lamp-bright);
+  background: rgba(244,196,90,.18);
+  border-color: var(--ng-lamp-gold);
+}
+.course-node:not(.visited) {
+  opacity: .72;
+  filter: saturate(.6);
+}
+.course-node:not(.visited):hover {
+  opacity: 1;
+  filter: saturate(1);
+}
+.visited-check {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 18px; height: 18px;
+  background: var(--ng-success);
+  color: #06102a;
+  font-size: 12px; font-weight: bold;
+  border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  border: 2px solid var(--ng-night-deep);
+  box-shadow: 0 0 6px rgba(136,200,120,.6);
+}
+
+/* ═══ ACHIEVEMENT BAR ═══ */
+#achievement-bar {
+  position:absolute; top:90px; left:50%; transform:translateX(-50%);
+  display:flex; gap:8px; align-items:center;
+  background: rgba(14,27,58,.85);
+  border: 1.5px solid rgba(244,196,90,.5);
+  border-radius: 22px;
+  padding: 6px 14px;
+  z-index: 35;
+  backdrop-filter: blur(6px);
+  font-family: var(--ng-font-read);
+  max-width: 92vw;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.achievement-badge {
+  display:flex; align-items:center; gap:6px;
+  font-size: 13px;
+  color: var(--ng-text-dim);
+  white-space: nowrap;
+  letter-spacing: 1px;
+  cursor: help;
+}
+.achievement-badge.unlocked {
+  color: var(--ng-lamp-gold);
+  text-shadow: 0 0 8px rgba(244,196,90,.5);
+}
+.achievement-badge .ach-ico {
+  font-size: 18px;
+  filter: grayscale(1) opacity(.4);
+}
+.achievement-badge.unlocked .ach-ico {
+  filter: none;
+  animation: ach-shimmer 4s ease-in-out infinite;
+}
+@keyframes ach-shimmer {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.12); filter: drop-shadow(0 0 8px var(--ng-lamp-gold)); }
+}
+#ach-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--ng-lamp-gold);
+  letter-spacing: 2px;
+  padding-right: 8px;
+  border-right: 1px solid rgba(244,196,90,.3);
+}
+
+/* ═══ MRS. VANCE STAGE INDICATOR ═══ */
+#patient-pin .stage-pill {
+  background: rgba(244,196,90,.18);
+  border: 1px solid var(--ng-lamp-gold);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 12px;
+  color: var(--ng-lamp-gold);
+  letter-spacing: 1px;
+  margin-left: 6px;
+}
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 920px) {
+  #achievement-bar { top: 76px; padding: 4px 10px; gap: 5px; }
+  .achievement-badge { font-size: 10px; }
+  .achievement-badge .ach-ico { font-size: 14px; }
+  #ach-header { font-size: 6px; padding-right: 5px; }
+}
+@media (max-width: 920px) {
+  #info-panel {
+    position:absolute; right:8px; left:8px; top:auto; bottom:88px; width:auto; max-height:280px;
+  }
+  #stats-ribbon { gap:8px; padding:6px 10px; font-size:11px; }
+  .stat-cell { min-width:54px; }
+  .course-label { font-size:11px; }
+  .course-code { font-size:6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ BACKGROUND LAYERS ═══ -->
+<div class="aurora">
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+</div>
+<div id="starfield"></div>
+
+<!-- ═══ TITLE ═══ -->
+<div id="title-banner">
+  <h1>The Nightingale Beacon Suite</h1>
+  <div class="tagline">Change Lives. Beginning with Your Own.</div>
+  <div class="divider"></div>
+  <div class="subtitle">⚜ GENERAL EDUCATION CAMPUS · v3 ⚜</div>
+  <a href="beacon_general_overworld.html" style="display:inline-block;margin-top:12px;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:2px;color:#f4c45a;background:rgba(14,27,58,.8);border:1px solid #3d4a8f;border-radius:9px;padding:9px 13px;text-decoration:none;">🗺️ MAP VIEW · WALK THE CAMPUS</a>
+</div>
+
+<!-- ═══ CENTERPIECE LAMP ═══ -->
+<div id="hub-lamp">
+  <svg width="180" height="220" viewBox="0 0 180 220">
+    <!-- Lamp body -->
+    <defs>
+      <radialGradient id="flameGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff7c0"/>
+        <stop offset="40%" stop-color="#ffcd44"/>
+        <stop offset="80%" stop-color="#ff8c42"/>
+        <stop offset="100%" stop-color="#e85a30" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lampBody" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f4c45a"/>
+        <stop offset="50%" stop-color="#d4a44a"/>
+        <stop offset="100%" stop-color="#8a6628"/>
+      </linearGradient>
+    </defs>
+    <!-- Flame -->
+    <g class="flame">
+      <ellipse cx="90" cy="42" rx="22" ry="38" fill="url(#flameGrad)"/>
+      <ellipse cx="90" cy="50" rx="12" ry="22" fill="#fff7c0" opacity=".75"/>
+      <ellipse cx="90" cy="58" rx="6" ry="10" fill="#fff" opacity=".9"/>
+    </g>
+    <!-- Wick -->
+    <rect x="86" y="78" width="8" height="12" fill="#3a2410"/>
+    <!-- Lamp top cap -->
+    <ellipse cx="90" cy="92" rx="34" ry="8" fill="url(#lampBody)" stroke="#8a6628" stroke-width="1.5"/>
+    <rect x="56" y="92" width="68" height="12" fill="url(#lampBody)"/>
+    <!-- Lamp glass / bowl -->
+    <path d="M 50 104 Q 50 160 90 174 Q 130 160 130 104 Z" fill="rgba(255,255,255,0.06)" stroke="#f4c45a" stroke-width="2"/>
+    <path d="M 60 108 Q 60 152 90 164 Q 120 152 120 108" fill="rgba(244,196,90,0.15)"/>
+    <!-- Lamp base -->
+    <ellipse cx="90" cy="178" rx="44" ry="9" fill="url(#lampBody)" stroke="#8a6628" stroke-width="1.5"/>
+    <rect x="46" y="178" width="88" height="14" fill="url(#lampBody)"/>
+    <ellipse cx="90" cy="192" rx="44" ry="9" fill="#8a6628"/>
+    <!-- Handle (curving back) -->
+    <path d="M 50 110 Q 18 120 30 160 Q 36 178 50 174" fill="none" stroke="url(#lampBody)" stroke-width="6" stroke-linecap="round"/>
+    <!-- Glow halo -->
+    <circle cx="90" cy="42" r="60" fill="url(#flameGrad)" opacity=".25"/>
+  </svg>
+</div>
+
+<!-- ═══ AREA LABELS ═══ -->
+<div class="area-label" style="top:14%; left:50%; transform:translateX(-50%);">⁘ Sciences ⁘</div>
+<div class="area-label" style="top:50%; left:6%;">⁘ Math ⁘</div>
+<div class="area-label" style="top:50%; right:6%;">⁘ Humanities ⁘</div>
+<div class="area-label" style="bottom:14%; left:24%;">⁘ Communication ⁘</div>
+<div class="area-label" style="bottom:14%; right:24%;">⁘ Social Sciences ⁘</div>
+
+<!-- ═══ ACHIEVEMENT BAR ═══ -->
+<div id="achievement-bar">
+  <span id="ach-header">⚜ ACHIEVEMENTS</span>
+  <div id="ach-list"></div>
+</div>
+
+<!-- ═══ COURSE NODES ═══ -->
+<!-- Positions are absolute % — 16 courses arranged around the lamp -->
+<div id="nodes"></div>
+
+<!-- ═══ INFO PANEL ═══ -->
+<div id="info-panel" class="empty">
+  Hover or tap any course pin to view details
+</div>
+
+<!-- ═══ STATS RIBBON ═══ -->
+<div id="stats-ribbon">
+  <div class="stat-cell"><span class="stat-val" id="stat-total">0 / 16</span><span class="stat-label">Courses</span></div>
+  <div class="stat-cell"><span class="stat-val" id="stat-credits">0 / 48</span><span class="stat-label">Credits</span></div>
+  <div class="stat-cell"><span class="stat-val" id="stat-bosses">0 / 80</span><span class="stat-label">Bosses</span></div>
+  <div class="stat-cell"><span class="stat-val" id="stat-questions">0 / 5000</span><span class="stat-label">Questions</span></div>
+</div>
+
+<!-- ═══ PATIENT PIN ═══ -->
+<div id="patient-pin" onclick="openPatientChart()" title="View continuity patient chart">
+  <span class="ico">📋</span><span>Mrs. Eleanor Vance · Chart</span>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   COURSE NODE DATA
+   16 Nightingale College gen-ed courses arranged in 5 breadth-area clusters
+   around the central Nightingale lamp.
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* COURSES are now derived from the shared catalog (../catalog.js) so this hub
+   and the launcher can never drift apart again. Radial map positions live here
+   (the catalog is layout-agnostic); everything else comes from the catalog. */
+const NODE_POS = {
+  sci220:[38,22], sci221:[50,18], sci225:[62,22], sci251:[30,30], sci131:[70,30],
+  drvidya:[50,31],
+  mat100:[14,42], mat220:[14,58],
+  hum110:[86,42], hum301:[86,58],
+  eng120:[24,74], eng311:[36,80], com301:[48,74],
+  psy201:[60,74], psy201lab:[58,84], psy300:[70,80], soc220:[80,74], ant300:[88,74]
+};
+const AREA_COLOR = {};
+(window.NG_CATALOG.areas || []).forEach(function(a){ AREA_COLOR[a.id] = a.color; });
+const COURSES = window.NG_CATALOG.games()
+  .filter(function(g){ return NODE_POS[g.id]; })
+  .map(function(g){
+    return {
+      id: g.id,
+      code: g.code,
+      title: g.subtitle || g.title,
+      credits: g.credits || 0,
+      area: g.area,
+      file: window.NG_CATALOG.resolve(g.path, '../'),
+      x: NODE_POS[g.id][0], y: NODE_POS[g.id][1],
+      color: AREA_COLOR[g.area] || '#5ec8ff',
+      topics: g.topics || '',
+      boss: g.boss || '',
+      visitKey: g.visitKey || null
+    };
+  });
+
+/* ═══ STARFIELD ═══ */
+
+/* ═══ STARFIELD ═══ */
+const starfield = document.getElementById('starfield');
+for(let i=0;i<60;i++){
+  const s = document.createElement('div');
+  s.className='star';
+  s.style.left = Math.random()*100+'vw';
+  s.style.top = Math.random()*100+'vh';
+  s.style.animationDelay = (Math.random()*4)+'s';
+  starfield.appendChild(s);
+}
+
+/* ═══ KERNEL-VISIT-KEY MAP ═══
+   Hub uses course IDs (sci220, ant300...); kernel tracks visits by gameType.type
+   (anatomy, culture...). Auto-derived from catalog so it can never drift — this is
+   what fixes the PsychLab 'psychlab' key the old hardcoded map silently dropped. */
+const VISIT_KEYS = {};
+COURSES.forEach(function(c){ if(c.visitKey) VISIT_KEYS[c.id] = c.visitKey; });
+function getProgress(){
+  try { return JSON.parse(localStorage.getItem('ng_global_progress')) || { visited:{}, questionsAnswered:0, coursesVisited:0 }; }
+  catch(e){ return { visited:{}, questionsAnswered:0, coursesVisited:0 }; }
+}
+function getAchievements(){
+  try { return JSON.parse(localStorage.getItem('ng_global_achievements')) || {}; }
+  catch(e){ return {}; }
+}
+function getPatientChart(){
+  try { return JSON.parse(localStorage.getItem('ng_global_ng_patient_eleanor')) || null; }
+  catch(e){ return null; }
+}
+
+/* ═══ RENDER NODES ═══ */
+const nodes = document.getElementById('nodes');
+const prog = getProgress();
+COURSES.forEach(c=>{
+  const a = document.createElement('a');
+  a.className = 'course-node';
+  const visitKey = VISIT_KEYS[c.id];
+  const visited = !!(visitKey && prog.visited && prog.visited[visitKey]);
+  if(visited) a.classList.add('visited');
+  a.href = c.file;
+  a.style.left = (c.x - 4) + '%';
+  a.style.top  = (c.y - 4) + '%';
+  a.dataset.cid = c.id;
+  a.innerHTML = `
+    <div class="course-pin">
+      <svg viewBox="0 0 42 52" width="42" height="52">
+        <defs>
+          <radialGradient id="grad-${c.id}" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="${c.color}"/>
+            <stop offset="100%" stop-color="${c.color}" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="21" cy="46" rx="10" ry="3" fill="rgba(0,0,0,.4)"/>
+        <path d="M 21 4 C 10 4 4 12 4 22 C 4 32 21 46 21 46 C 21 46 38 32 38 22 C 38 12 32 4 21 4 Z"
+              fill="${c.color}" stroke="#0e1b3a" stroke-width="2"/>
+        <circle cx="21" cy="20" r="9" fill="#0e1b3a"/>
+        <g class="pin-flame">
+          <ellipse cx="21" cy="18" rx="3.5" ry="6.5" fill="url(#flameGrad)"/>
+          <ellipse cx="21" cy="20" rx="2" ry="4" fill="#fff7c0" opacity=".85"/>
+        </g>
+      </svg>
+      ${visited ? '<div class="visited-check">✓</div>' : ''}
+    </div>
+    <div class="course-label">${c.title}</div>
+    <div class="course-code">${c.code}</div>
+  `;
+  a.addEventListener('mouseenter', ()=> showInfo(c));
+  a.addEventListener('touchstart', (e)=>{ showInfo(c); }, {passive:true});
+  a.addEventListener('focus', ()=> showInfo(c));
+  nodes.appendChild(a);
+});
+
+/* ═══ RENDER ACHIEVEMENTS ═══ */
+const ACHIEVEMENT_DEFS = [
+  { id:'first_steps', name:'First Steps', icon:'🌱', desc:'Visit your first quest' },
+  { id:'nursing_core', name:'Nursing Core', icon:'⚕', desc:'Visit Anatomy + Physio + Patho + Micro + Nutrition' },
+  { id:'renaissance', name:'Renaissance Scholar', icon:'🎓', desc:'Visit 8 different courses' },
+  { id:'beacon_veteran', name:'Beacon Veteran', icon:'⚜', desc:'Visit every course in the suite' },
+  { id:'question_century', name:'Centurion', icon:'💯', desc:'Answer 100 questions' },
+  { id:'question_mille', name:'Millennial', icon:'🏛', desc:'Answer 1,000 questions' },
+  { id:'humanities', name:'Liberal Arts', icon:'🪶', desc:'Ethics + Culture + Western Civ' },
+  { id:'communicator', name:'Communicator', icon:'🗨', desc:'Composition + Editor + Speech' }
+];
+const achList = document.getElementById('ach-list');
+const got = getAchievements();
+achList.style.cssText = 'display:flex;gap:6px;align-items:center;flex-wrap:nowrap;';
+achList.innerHTML = ACHIEVEMENT_DEFS.map(a=>{
+  const u = !!got[a.id];
+  return `<span class="achievement-badge ${u?'unlocked':''}" title="${a.name} — ${a.desc}${u?' ✓ UNLOCKED':' (locked)'}">
+    <span class="ach-ico">${a.icon}</span>${u?'<span>'+a.name+'</span>':''}
+  </span>`;
+}).join('');
+
+/* ═══ INFO PANEL ═══ */
+const infoPanel = document.getElementById('info-panel');
+function showInfo(c){
+  infoPanel.classList.remove('empty');
+  const stage = ({sci220:1, sci221:2, sci225:3, sci251:4, sci131:5})[c.id];
+  const continuityNote = stage
+    ? `<div style="margin-top:8px;font-size:12px;color:#88c878;border-left:2px solid #88c878;padding-left:8px;">
+         ⚜ Continuity Patient · Stage ${stage} of 5 · Mrs. Eleanor Vance
+       </div>` : '';
+  infoPanel.innerHTML = `
+    <div class="info-code">${c.code} · ${c.credits} CREDITS</div>
+    <h2>${c.title}</h2>
+    <div class="info-desc">${c.topics}</div>
+    <div class="info-meta"><strong>Bosses:</strong> ${c.boss}</div>
+    ${continuityNote}
+    <a class="launch-btn" href="${c.file}">▶ ENTER QUEST</a>
+  `;
+}
+function clearInfo(){
+  infoPanel.classList.add('empty');
+  infoPanel.innerHTML = 'Hover or tap any course pin to view details';
+}
+
+/* ═══ STATS (reads ng_global_progress, the v3.1 cross-game tracker) ═══ */
+const TOTAL_COURSES = COURSES.length;
+const TOTAL_CREDITS = COURSES.reduce((s,c)=> s + c.credits, 0);
+function updateStats(){
+  const p = getProgress();
+  document.getElementById('stat-total').textContent = (p.coursesVisited||0) + ' / ' + TOTAL_COURSES;
+  document.getElementById('stat-credits').textContent = TOTAL_CREDITS + ' / ' + TOTAL_CREDITS;
+  document.getElementById('stat-bosses').textContent = (p.sectionsCompleted||0) + ' / 80';
+  document.getElementById('stat-questions').textContent = (p.questionsAnswered||0) + ' / 5000';
+  // Update Mrs. Vance pill with current stage
+  const chart = getPatientChart();
+  const stage = chart ? (chart.currentStage||0) : 0;
+  const pin = document.getElementById('patient-pin');
+  if(pin && !pin.querySelector('.stage-pill')){
+    pin.insertAdjacentHTML('beforeend','<span class="stage-pill">'+stage+'/5</span>');
+  } else if(pin) {
+    pin.querySelector('.stage-pill').textContent = stage + '/5';
+  }
+}
+updateStats();
+// Refresh when window regains focus (user comes back from a quest)
+window.addEventListener('focus', updateStats);
+
+/* ═══ PATIENT CHART (uses kernel if available, fallback if not) ═══ */
+function openPatientChart(){
+  if(window.NG && window.NG.patient && window.NG.patient.openChartModal){
+    window.NG.patient.openChartModal();
+  } else {
+    // Render inline (kernel not loaded on hub itself)
+    let chart;
+    try { chart = JSON.parse(localStorage.getItem('ng_global_ng_patient_eleanor') || 'null'); } catch(e){}
+    chart = chart || { name:'Eleanor Vance', currentStage:0, timeline:[], diagnoses:[], meds:[], labs:{} };
+    alert('Mrs. Eleanor Vance · 68F\n\nCurrent stage: '+chart.currentStage+' of 5\nDiagnoses: '+(chart.diagnoses.join(', ')||'None yet')+'\n\n(Full chart visible once kernel-bearing games are visited.)');
+  }
+}
+
+/* ═══ KEYBOARD NAV ═══ */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ clearInfo(); }
+});
+</script>
+
+</body>
+</html>

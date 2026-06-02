@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCI225 Week 8 Study Guide — Hematologic Structure, Function & Alterations</title>
+<style>
+  :root {
+    --u1: #1e40af; --u1-bg: #eff6ff; --u1-brd: #93c5fd;
+    --u2: #7c3aed; --u2-bg: #faf5ff; --u2-brd: #c4b5fd;
+    --u3: #c2410c; --u3-bg: #fff7ed; --u3-brd: #fdba74;
+    --u4: #047857; --u4-bg: #ecfdf5; --u4-brd: #6ee7b7;
+    --u5: #b91c1c; --u5-bg: #fef2f2; --u5-brd: #fca5a5;
+    --u6: #0e7490; --u6-bg: #ecfeff; --u6-brd: #67e8f9;
+    --mech: #1d4ed8; --mech-bg: #eff6ff;
+    --why:  #b45309; --why-bg:  #fffbeb;
+    --comp: #047857; --comp-bg: #f0fdf4;
+    --path: #be123c; --path-bg: #fff1f2;
+    --miss: #991b1b; --miss-bg: #fef2f2;
+    --acro: #6d28d9; --acro-bg: #f5f3ff;
+    --tip:  #0f766e; --tip-bg:  #ecfdf5;
+    --text: #111827; --muted: #4b5563; --line: #d1d5db;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 10.5pt; line-height: 1.42; color: var(--text);
+    margin: 0; padding: 0; background: #f9fafb;
+  }
+  .layout { display: grid; grid-template-columns: 240px 1fr; max-width: 1140px; margin: 0 auto; }
+  nav.toc {
+    position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto;
+    background: #fff; border-right: 1px solid var(--line); padding: 14px 12px; font-size: 9.4pt;
+  }
+  nav.toc h3 { font-size: 10pt; margin: 6px 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  nav.toc a { display: block; padding: 3px 6px; color: var(--text); text-decoration: none; border-radius: 3px; margin-bottom: 1px; }
+  nav.toc a:hover { background: #f3f4f6; }
+  nav.toc .u1 { border-left: 3px solid var(--u1); }
+  nav.toc .u2 { border-left: 3px solid var(--u2); }
+  nav.toc .u3 { border-left: 3px solid var(--u3); }
+  nav.toc .u4 { border-left: 3px solid var(--u4); }
+  nav.toc .u5 { border-left: 3px solid var(--u5); }
+  nav.toc .u6 { border-left: 3px solid var(--u6); }
+  main { padding: 20px 28px; background: #fff; }
+  h1 { font-size: 20pt; margin: 0 0 4px; }
+  h2 { font-size: 15pt; margin: 18px 0 6px; padding: 6px 10px; border-radius: 4px; color: #fff; }
+  h3 { font-size: 12pt; margin: 12px 0 4px; padding-bottom: 2px; border-bottom: 1px solid var(--line); }
+  h4 { font-size: 10.8pt; margin: 8px 0 3px; color: var(--muted); }
+  .unit1 h2 { background: var(--u1); } .unit2 h2 { background: var(--u2); }
+  .unit3 h2 { background: var(--u3); } .unit4 h2 { background: var(--u4); }
+  .unit5 h2 { background: var(--u5); } .unit6 h2 { background: var(--u6); }
+  .unit1 h3 { color: var(--u1); border-bottom-color: var(--u1-brd); }
+  .unit2 h3 { color: var(--u2); border-bottom-color: var(--u2-brd); }
+  .unit3 h3 { color: var(--u3); border-bottom-color: var(--u3-brd); }
+  .unit4 h3 { color: var(--u4); border-bottom-color: var(--u4-brd); }
+  .unit5 h3 { color: var(--u5); border-bottom-color: var(--u5-brd); }
+  .unit6 h3 { color: var(--u6); border-bottom-color: var(--u6-brd); }
+  p { margin: 4px 0; }
+  ul, ol { margin: 4px 0 6px 20px; padding: 0; }
+  li { margin: 1px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin: 6px 0 8px; }
+  th, td { border: 1px solid var(--line); padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .box { border-left: 4px solid; padding: 6px 10px; margin: 6px 0; border-radius: 3px; font-size: 10pt; }
+  .mech { border-color: var(--mech); background: var(--mech-bg); }
+  .mech::before { content: "MECHANISM "; font-weight: 700; color: var(--mech); font-size: 8.5pt; letter-spacing: .5px; }
+  .why { border-color: var(--why); background: var(--why-bg); }
+  .why::before { content: "WHY "; font-weight: 700; color: var(--why); font-size: 8.5pt; letter-spacing: .5px; }
+  .comp { border-color: var(--comp); background: var(--comp-bg); }
+  .comp::before { content: "COMPENSATION "; font-weight: 700; color: var(--comp); font-size: 8.5pt; letter-spacing: .5px; }
+  .path { border-color: var(--path); background: var(--path-bg); }
+  .path::before { content: "PATHOLOGY "; font-weight: 700; color: var(--path); font-size: 8.5pt; letter-spacing: .5px; }
+  .miss { border-color: var(--miss); background: var(--miss-bg); }
+  .miss::before { content: "⚠ COMMON MISSTEP "; font-weight: 700; color: var(--miss); font-size: 8.5pt; letter-spacing: .5px; }
+  .acro { border-color: var(--acro); background: var(--acro-bg); }
+  .acro::before { content: "ACRONYM / MNEMONIC "; font-weight: 700; color: var(--acro); font-size: 8.5pt; letter-spacing: .5px; }
+  .tip { border-color: var(--tip); background: var(--tip-bg); }
+  .tip::before { content: "★ EXAM TIP "; font-weight: 700; color: var(--tip); font-size: 8.5pt; letter-spacing: .5px; }
+  .flow { background: #f9fafb; border: 1px solid var(--line); padding: 8px 10px; border-radius: 4px; font-size: 9.8pt; margin: 6px 0; font-family: "Consolas", monospace; }
+  .flow .arr { color: #6b7280; margin: 0 3px; }
+  .q { background: #fafafa; border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; margin: 6px 0; font-size: 10pt; }
+  .q .qhead { font-weight: 600; margin-bottom: 3px; }
+  .q .opts { margin: 3px 0 4px 0; }
+  .q .ans { background: #ecfdf5; border-left: 3px solid var(--comp); padding: 4px 8px; margin-top: 4px; font-size: 9.8pt; }
+  .q .ans b { color: var(--comp); }
+  details summary { cursor: pointer; color: var(--mech); font-size: 9.5pt; font-weight: 600; }
+  .hero { padding: 14px 18px; background: linear-gradient(135deg, #1e3a8a, #047857, #b91c1c); color: #fff; border-radius: 6px; margin-bottom: 14px; }
+  .hero h1 { color: #fff; }
+  .hero p { margin: 4px 0; font-size: 10pt; opacity: .95; }
+  .spine { background: rgba(255,255,255,.15); padding: 6px 10px; border-radius: 4px; margin-top: 6px; font-size: 9.8pt; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; font-size: 9pt; }
+  .legend span { padding: 2px 8px; border-radius: 3px; border: 1px solid; }
+  .lg-mech { color: var(--mech); background: var(--mech-bg); border-color: var(--mech); }
+  .lg-why  { color: var(--why);  background: var(--why-bg);  border-color: var(--why); }
+  .lg-comp { color: var(--comp); background: var(--comp-bg); border-color: var(--comp); }
+  .lg-path { color: var(--path); background: var(--path-bg); border-color: var(--path); }
+  .lg-miss { color: var(--miss); background: var(--miss-bg); border-color: var(--miss); }
+  .lg-acro { color: var(--acro); background: var(--acro-bg); border-color: var(--acro); }
+  .lg-tip  { color: var(--tip);  background: var(--tip-bg);  border-color: var(--tip); }
+  .chip { font-size: 9pt; padding: 2px 8px; border-radius: 3px; color: #fff; font-weight: 600; }
+  .c1 { background: var(--u1); } .c2 { background: var(--u2); } .c3 { background: var(--u3); }
+  .c4 { background: var(--u4); } .c5 { background: var(--u5); } .c6 { background: var(--u6); }
+  .btns { margin: 10px 0; }
+  .btns button { background: #0f172a; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-size: 9.8pt; cursor: pointer; margin-right: 6px; }
+  .small { font-size: 9.3pt; color: var(--muted); }
+  @media print {
+    body { background: #fff; }
+    .layout { display: block; max-width: none; }
+    nav.toc, .btns { display: none; }
+    main { padding: 0.35in 0.4in; }
+    details { page-break-inside: avoid; }
+    details[open] summary { display: none; }
+    details:not([open]) > *:not(summary) { display: block; }
+    .hero, h2, .chip, .box, .q .ans, th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+  <h3>Week 8 Study Guide</h3>
+  <a href="#intro"><b>How to use this guide</b></a>
+  <a href="#u1" class="u1"><b>Unit 1.</b> Blood Structure & Function</a>
+  <a href="#u1-rbc" class="u1">&nbsp;&nbsp;Erythrocytes & O₂</a>
+  <a href="#u1-wbc" class="u1">&nbsp;&nbsp;Leukocytes</a>
+  <a href="#u1-plt" class="u1">&nbsp;&nbsp;Platelets & hemostasis</a>
+  <a href="#u1-q" class="u1">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#u2" class="u2"><b>Unit 2.</b> Anemia</a>
+  <a href="#u2-types" class="u2">&nbsp;&nbsp;Anemia types by mechanism</a>
+  <a href="#u2-comp" class="u2">&nbsp;&nbsp;Compensation</a>
+  <a href="#u2-q" class="u2">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#u3" class="u3"><b>Unit 3.</b> Bleeding & Clotting</a>
+  <a href="#u3-thrombo" class="u3">&nbsp;&nbsp;Thrombocytopenia</a>
+  <a href="#u3-poly" class="u3">&nbsp;&nbsp;Polycythemia & thrombosis</a>
+  <a href="#u3-q" class="u3">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#u4" class="u4"><b>Unit 4.</b> White Cell Disorders</a>
+  <a href="#u4-neutro" class="u4">&nbsp;&nbsp;Leukopenia & neutropenia</a>
+  <a href="#u4-leuk" class="u4">&nbsp;&nbsp;Leukemia recap</a>
+  <a href="#u4-q" class="u4">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#u5" class="u5"><b>Unit 5.</b> Pediatric Hematology</a>
+  <a href="#u5-sickle" class="u5">&nbsp;&nbsp;Sickle cell</a>
+  <a href="#u5-neo" class="u5">&nbsp;&nbsp;Neonatal jaundice & HDN</a>
+  <a href="#u5-q" class="u5">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#u6" class="u6"><b>Unit 6.</b> Environmental & Systemic</a>
+  <a href="#u6-alt" class="u6">&nbsp;&nbsp;Altitude · radiation · toxins</a>
+  <a href="#u6-q" class="u6">&nbsp;&nbsp;Practice Qs</a>
+  <a href="#appx"><b>Appendix:</b> Missteps & Mnemonics</a>
+</nav>
+
+<main>
+
+<div class="btns">
+  <button onclick="window.print()">Print / Save as PDF</button>
+  <button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Expand All</button>
+  <button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Collapse All</button>
+</div>
+
+<section id="intro">
+<div class="hero">
+  <h1>SCI225 Week 8 — Complete Study Guide</h1>
+  <p><b>Made by Dr. Vidya Aggrawal</b></p>
+  <p>Hematologic Structure &amp; Function · Anemia · Bleeding &amp; Clotting · White Cell Disorders · Pediatric Hematology · Environmental Effects</p>
+  <div class="spine"><b>Study Spine — for every blood disorder ask:</b><br>
+  1. Which line is affected (RBC / WBC / platelet)? &nbsp; 2. Production failure or destruction? &nbsp; 3. Compensatory response present? &nbsp; 4. What's the first lab clue?</div>
+</div>
+
+<div class="legend">
+  <span class="lg-mech">MECHANISM</span>
+  <span class="lg-why">WHY</span>
+  <span class="lg-comp">COMPENSATION</span>
+  <span class="lg-path">PATHOLOGY</span>
+  <span class="lg-miss">MISSTEP</span>
+  <span class="lg-acro">ACRONYM</span>
+  <span class="lg-tip">EXAM TIP</span>
+</div>
+
+<h3>Course alignment</h3>
+<ul>
+  <li><b>LO1</b> — Recall the structure and function of the hematologic system <span class="small">(Unit 1)</span></li>
+  <li><b>LO2</b> — Describe the alterations of hematologic function and resultant consequences <span class="small">(Units 2–4)</span></li>
+  <li><b>LO3</b> — Describe the alterations of hematologic function in children <span class="small">(Unit 5)</span></li>
+  <li><b>LO4</b> — Connect key ideas from current events to learning <span class="small">(Unit 6)</span></li>
+</ul>
+<p>Every practice question is original — designed to teach you to apply the concept, not to reproduce exam items.</p>
+</section>
+
+<!-- ========================= UNIT 1 ========================= -->
+<section id="u1" class="unit1">
+<h2>Unit 1 &nbsp;•&nbsp; Blood Structure & Function &nbsp;<span class="chip c1">LO1</span></h2>
+
+<h3 id="u1-rbc">1.1 Erythrocytes (RBCs) and Oxygen Delivery</h3>
+
+<div class="box mech">
+RBCs are biconcave disks packed with hemoglobin (Hgb), a protein with four globin chains and four heme (iron-containing) groups. Each Hgb molecule carries up to 4 O₂ molecules. Lifespan: ~120 days. Production happens in red bone marrow and is driven by <b>erythropoietin (EPO)</b> from the kidney.
+</div>
+
+<div class="flow">
+↓ Tissue O₂ <span class="arr">→</span> Kidney senses hypoxia <span class="arr">→</span> EPO release <span class="arr">→</span> Bone marrow produces more RBCs <span class="arr">→</span> ↑ O₂-carrying capacity <span class="arr">→</span> Tissue oxygenation restored
+</div>
+
+<table>
+  <tr><th>Lab</th><th>Normal (adult)</th><th>What it reflects</th></tr>
+  <tr><td><b>Hemoglobin (Hgb)</b></td><td>M: 13.5–17.5 g/dL · F: 12–15.5 g/dL</td><td>O₂-carrying protein in RBCs</td></tr>
+  <tr><td><b>Hematocrit (Hct)</b></td><td>M: 41–53% · F: 36–46%</td><td>% of blood volume that is RBCs</td></tr>
+  <tr><td><b>RBC count</b></td><td>4.5–5.5 million/μL</td><td>Cell number</td></tr>
+  <tr><td><b>MCV</b> (mean corpuscular volume)</td><td>80–100 fL</td><td>Average RBC size — &lt;80 microcytic, &gt;100 macrocytic</td></tr>
+  <tr><td><b>Reticulocyte count</b></td><td>0.5–1.5%</td><td>Young RBCs — marker of marrow response</td></tr>
+</table>
+
+<div class="box why">
+<b>Why oxygen delivery is the bottom line.</b> The whole reason to have RBCs is to carry oxygen to tissues. O₂ delivery = cardiac output × arterial O₂ content. Any fall in Hgb, SaO₂, or cardiac output reduces delivery. The body responds with both long-term increases in RBC production (EPO) and short-term increases in heart rate and respiratory rate to compensate.
+</div>
+
+<h3 id="u1-wbc">1.2 Leukocytes (WBCs)</h3>
+
+<table>
+  <tr><th>WBC</th><th>Type</th><th>Main job</th></tr>
+  <tr><td><b>Neutrophil</b> (~60%)</td><td>Granulocyte (myeloid)</td><td>Phagocytosis — first responder to bacteria; the most direct killer of microorganisms</td></tr>
+  <tr><td><b>Lymphocyte</b> (~30%)</td><td>Lymphoid</td><td>B cells make antibodies; T cells provide cellular immunity (Week 2)</td></tr>
+  <tr><td><b>Monocyte / Macrophage</b> (~5%)</td><td>Myeloid</td><td>Phagocytosis in tissues, antigen presentation</td></tr>
+  <tr><td><b>Eosinophil</b> (~3%)</td><td>Granulocyte</td><td>Parasites, allergic reactions</td></tr>
+  <tr><td><b>Basophil</b> (&lt;1%)</td><td>Granulocyte</td><td>Releases histamine; allergic responses</td></tr>
+</table>
+
+<div class="box tip">
+<b>"Which leukocyte function most directly eliminates invading microorganisms?"</b> Phagocytosis — neutrophils and macrophages literally engulf and digest pathogens. Antibody production is more indirect (it tags pathogens for phagocytosis or complement-mediated killing).
+</div>
+
+<h3 id="u1-plt">1.3 Platelets and Primary Hemostasis</h3>
+
+<div class="box mech">
+Platelets are anucleate cell fragments shed from <b>megakaryocytes</b> in the marrow. Lifespan ~8–10 days. Normal count: 150,000–400,000/μL. When a vessel is injured, platelets adhere (via <b>von Willebrand factor</b>) → activate → aggregate → form a temporary <b>platelet plug</b> (primary hemostasis). The clotting cascade then deposits <b>fibrin</b> (secondary hemostasis) to stabilize the clot.
+</div>
+
+<div class="flow">
+Vessel injury <span class="arr">→</span> vasoconstriction <span class="arr">→</span> platelet adhesion + activation + aggregation <span class="arr">→</span> platelet plug <span class="arr">→</span> coagulation cascade <span class="arr">→</span> fibrin mesh stabilizes clot
+</div>
+
+<table>
+  <tr><th>Deficit</th><th>Bleeding pattern</th></tr>
+  <tr><td><b>Platelet problem</b> (thrombocytopenia or dysfunction)</td><td><b>Mucocutaneous:</b> petechiae, ecchymoses, gingival bleeding, epistaxis, prolonged bleeding from minor cuts</td></tr>
+  <tr><td><b>Coagulation factor problem</b> (e.g., hemophilia)</td><td><b>Deep bleeding:</b> hemarthroses, intramuscular hematomas, delayed bleeding</td></tr>
+  <tr><td><b>Vessel problem</b></td><td>Easy bruising, palpable purpura</td></tr>
+</table>
+
+<h3 id="u1-q">Practice Questions — Blood Structure & Function</h3>
+
+<div class="q">
+<div class="qhead">Q1. Which leukocyte function is most directly responsible for eliminating invading microorganisms?</div>
+<div class="opts">A. Antibody production by plasma cells<br>B. Phagocytosis by neutrophils and macrophages<br>C. Histamine release by basophils<br>D. Cytokine secretion by helper T cells</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Phagocytes (neutrophils first, macrophages in tissue) directly engulf and digest pathogens. Antibodies tag, but the killing is largely done by phagocytes and complement.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q2. Which finding would the nurse most expect in a patient with thrombocytopenia?</div>
+<div class="opts">A. Hemarthroses (deep joint bleeds)<br>B. Petechiae and easy bruising<br>C. Pallor and fatigue only<br>D. Recurrent bacterial pneumonia</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Platelet deficiency produces mucocutaneous bleeding (petechiae, ecchymoses, mucosal bleeding). Hemarthroses suggest a coagulation factor problem (e.g., hemophilia).</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q3. After blood donation, which mechanism most directly restores red blood cell count over the following weeks?</div>
+<div class="opts">A. Splenic release of stored RBCs<br>B. Erythropoietin from the kidneys stimulates marrow erythropoiesis<br>C. Hepatic synthesis of new hemoglobin in the liver<br>D. Lymphocyte proliferation</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Reduced O₂-carrying capacity is sensed by the kidneys, which release EPO → bone marrow ramps up RBC production → reticulocyte count rises → Hgb returns toward baseline over weeks.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= UNIT 2 ========================= -->
+<section id="u2" class="unit2">
+<h2>Unit 2 &nbsp;•&nbsp; Anemia &nbsp;<span class="chip c2">LO2</span></h2>
+
+<div class="box mech">
+<b>Anemia</b> = decreased Hgb / RBCs / Hct → reduced O₂-carrying capacity → tissue hypoxia. The body compensates with several mechanisms; only severe or rapidly developing anemia overwhelms compensation.
+</div>
+
+<h3 id="u2-types">2.1 Major Anemia Types — Group by Mechanism</h3>
+
+<table>
+  <tr><th>Anemia</th><th>MCV</th><th>Mechanism</th><th>Clinical clue</th></tr>
+  <tr><td><b>Iron deficiency</b></td><td>Microcytic (low MCV), hypochromic</td><td>Insufficient iron → can't make heme → small, pale RBCs</td><td>Chronic blood loss (GI bleed, menstrual), poor diet, pregnancy; pica; spoon nails</td></tr>
+  <tr><td><b>Vitamin B12 deficiency</b></td><td>Macrocytic (high MCV)</td><td>B12 needed for DNA synthesis; deficiency → impaired RBC division → large immature cells; pernicious anemia = autoimmune loss of intrinsic factor → can't absorb B12</td><td>Glossitis, paresthesias, ataxia (B12 also needed for myelin)</td></tr>
+  <tr><td><b>Folate deficiency</b></td><td>Macrocytic</td><td>Same DNA synthesis problem as B12; from poor diet, alcoholism, pregnancy</td><td>No neurologic findings (key difference from B12)</td></tr>
+  <tr><td><b>Hemolytic anemia</b></td><td>Often normocytic</td><td>RBCs destroyed faster than made → free Hgb → indirect bilirubin → jaundice; ↑ reticulocytes</td><td>Anemia + jaundice + ↑ indirect bilirubin + ↑ LDH; sickle cell, G6PD, autoimmune, mechanical valve</td></tr>
+  <tr><td><b>Anemia of chronic disease</b> (inflammation)</td><td>Normocytic or microcytic</td><td>Chronic inflammation → hepcidin ↑ → iron locked in storage despite adequate stores → marrow can't access it</td><td>Chronic infection, autoimmune disease, malignancy, CKD; ferritin normal or HIGH; develops after viral inflammation in some patients</td></tr>
+  <tr><td><b>Aplastic anemia</b></td><td>Normocytic</td><td>Marrow failure → pancytopenia (low RBCs, WBCs, platelets)</td><td>Radiation, drugs, chemicals, viral; bleeding + infection + fatigue</td></tr>
+  <tr><td><b>Acute blood loss</b></td><td>Normocytic initially</td><td>Hemorrhage; Hgb often normal at first (hemoconcentrated) until volume replaced</td><td>Trauma, GI bleed; tachycardia, hypotension</td></tr>
+</table>
+
+<div class="box acro">
+<b>"Microcytic = small Iron / chronic disease. Macrocytic = big B12 / Folate."</b><br>
+Reading the MCV is your first move on any anemia question — it splits the differential immediately.
+</div>
+
+<div class="box path">
+<b>Hemolytic anemia signature.</b> When RBCs are destroyed, the body sees: anemia + jaundice (from heme breakdown to bilirubin) + elevated indirect bilirubin + elevated LDH (released from lysed cells) + low haptoglobin (binds free Hgb). The reticulocyte count is typically high because the marrow tries to keep up.
+</div>
+
+<div class="box why">
+<b>Why anemia of chronic disease has paradoxically adequate iron stores.</b> Inflammatory cytokines (IL-6) raise hepcidin, a hormone that locks iron inside macrophages and blocks intestinal absorption. Total body iron is fine — it's just unavailable to the marrow. Iron supplementation alone won't fix it; treating the underlying disease will.
+</div>
+
+<h3 id="u2-comp">2.2 Compensatory Responses to Anemia</h3>
+
+<div class="three-col">
+  <div class="box comp"><b>Cardiovascular.</b> ↑ heart rate, ↑ stroke volume, ↑ cardiac output → push more blood per minute through tissues.</div>
+  <div class="box comp"><b>Respiratory.</b> ↑ respiratory rate and depth → maximize SaO₂ and O₂ uptake.</div>
+  <div class="box comp"><b>Marrow.</b> ↑ EPO from kidneys → ↑ erythropoiesis → ↑ reticulocyte count.</div>
+</div>
+
+<div class="box mech">
+At the tissue level, oxygen unloading from Hgb increases (<b>right shift</b> of the O₂-Hgb dissociation curve) thanks to ↑ 2,3-BPG, ↑ CO₂, ↓ pH. This means each Hgb molecule gives up more of its O₂ to tissues that need it most.
+</div>
+
+<div class="box tip">
+<b>"Which mechanisms directly improve oxygen availability at the tissue level?"</b> Answers include: increased cardiac output, increased respiratory rate, increased EPO-driven erythropoiesis, and right shift of the O₂-Hgb dissociation curve (more O₂ released to tissues).
+</div>
+
+<h3 id="u2-q">Practice Questions — Anemia</h3>
+
+<div class="q">
+<div class="qhead">Q4. A patient has microcytic, hypochromic erythrocytes. Most likely cause?</div>
+<div class="opts">A. Vitamin B12 deficiency<br>B. Folate deficiency<br>C. Iron deficiency<br>D. Acute blood loss</div>
+<details><summary>Show answer</summary><div class="ans"><b>C.</b> Microcytic + hypochromic = iron deficiency. Without iron, heme synthesis fails and RBCs are smaller and paler.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q5. A patient with chronic inflammation develops anemia despite adequate iron stores. Which mechanism is most responsible?</div>
+<div class="opts">A. Loss of intrinsic factor<br>B. Hepcidin elevation locking iron in macrophages and blocking absorption<br>C. Bone marrow infiltration<br>D. Hemolysis from antibody binding</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Anemia of chronic disease — IL-6 → hepcidin → iron stays sequestered. Total body iron is normal/high but functionally unavailable. Treating inflammation is the answer.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q6. A patient presents with anemia, jaundice, and elevated indirect bilirubin. Which type of anemia is most likely?</div>
+<div class="opts">A. Iron deficiency<br>B. Hemolytic anemia<br>C. Folate deficiency<br>D. Acute blood loss</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Hemolysis releases heme → broken down to bilirubin → unconjugated (indirect) bilirubin rises → jaundice. ↑ LDH and ↑ reticulocytes complete the picture.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q7. A patient is diagnosed with vitamin B12 deficiency anemia. Which finding is most expected?</div>
+<div class="opts">A. Microcytic, hypochromic RBCs<br>B. Macrocytic RBCs and possible neurologic symptoms (paresthesia, ataxia)<br>C. ↑ indirect bilirubin and jaundice<br>D. Pancytopenia</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> B12 deficiency → impaired DNA synthesis → macrocytic RBCs. B12 is also required for myelin synthesis → neurologic symptoms differentiate it from folate deficiency.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q8. <b>Select all that apply.</b> Which mechanisms directly improve oxygen availability at the tissue level in anemia?</div>
+<div class="opts">A. Increased cardiac output<br>B. Increased respiratory rate and depth<br>C. Increased erythropoietin → erythropoiesis<br>D. Right shift of the O₂-Hgb dissociation curve<br>E. Reduced kidney function</div>
+<details><summary>Show answer</summary><div class="ans"><b>A, B, C, D.</b> All four are physiologic compensations for hypoxia. E is the opposite — kidney function (and EPO) declining would worsen anemia.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q9. A patient with chronic hypoxia (e.g., chronic lung disease) develops increased red blood cell production. Which best explains this?</div>
+<div class="opts">A. The bone marrow randomly increases output<br>B. Hypoxia → ↑ EPO from the kidneys → marrow erythropoiesis<br>C. Inflammation drives more erythrocytes<br>D. Pancreatic hormones rise</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Same axis as in altitude adaptation — kidneys sense hypoxia and produce EPO, which drives marrow to make more RBCs. Hct can rise enough to increase blood viscosity and thrombosis risk.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= UNIT 3 ========================= -->
+<section id="u3" class="unit3">
+<h2>Unit 3 &nbsp;•&nbsp; Bleeding & Clotting Disorders &nbsp;<span class="chip c3">LO2</span></h2>
+
+<h3 id="u3-thrombo">3.1 Thrombocytopenia</h3>
+
+<div class="box mech">
+<b>Thrombocytopenia</b> = platelet count &lt; 150,000/μL. Bleeding risk rises as count falls. Spontaneous bleeding is rare above 50,000; serious risk &lt; 20,000; life-threatening &lt; 10,000.
+</div>
+
+<p><b>Mechanisms:</b></p>
+<ul>
+  <li><b>Decreased production</b> — marrow failure (aplastic anemia, leukemia, chemotherapy, radiation, B12 deficiency)</li>
+  <li><b>Increased destruction</b> — immune (ITP), drug-induced, DIC, TTP/HUS, hypersplenism</li>
+  <li><b>Sequestration</b> — splenic enlargement traps platelets</li>
+</ul>
+<p><b>Classic presentation:</b> petechiae, ecchymoses, mucosal bleeding (gums, nose), prolonged bleeding from minor cuts. Heavy menstruation. <b>No deep bleeds</b> (those suggest coagulation factor problems).</p>
+
+<h3 id="u3-poly">3.2 Polycythemia and Thrombosis</h3>
+
+<div class="box path">
+<b>Polycythemia</b> = elevated RBC mass (Hct typically &gt; 50%). Causes:
+<ul>
+  <li><b>Primary (polycythemia vera)</b> — myeloproliferative disorder; bone marrow makes too many RBCs autonomously</li>
+  <li><b>Secondary appropriate</b> — chronic hypoxia (high altitude, COPD, smoking, sleep apnea, congenital heart disease) → ↑ EPO → ↑ RBC</li>
+  <li><b>Secondary inappropriate</b> — EPO-secreting tumor (renal cell carcinoma)</li>
+</ul>
+</div>
+
+<div class="box why">
+<b>Why polycythemia raises thrombosis risk.</b> Increased Hct = increased blood viscosity. Slower flow + more cells touching each other = greater platelet aggregation and clot formation. Patients can develop strokes, MIs, DVT, PE. Treatment includes phlebotomy and management of the underlying cause.
+</div>
+
+<h3>3.3 Thrombosis — Virchow's Triad</h3>
+
+<div class="box acro">
+<b>Virchow's triad</b> — three drivers of thrombosis:
+<ul>
+  <li><b>Endothelial injury</b> — atherosclerosis, surgery, trauma, central line</li>
+  <li><b>Stasis (slow flow)</b> — immobility, atrial fibrillation, varicose veins, prolonged sitting</li>
+  <li><b>Hypercoagulability</b> — inherited (Factor V Leiden, antithrombin deficiency), acquired (cancer, pregnancy, oral contraceptives, polycythemia)</li>
+</ul>
+</div>
+
+<div class="box path">
+<b>Immobility-related thrombosis</b> hits all three Virchow drivers in a hospitalized or post-surgical patient: stasis from lying still, endothelial injury from surgery, hypercoagulable state from inflammation. Prophylactic anticoagulation, sequential compression devices, and early ambulation are all preventive.
+</div>
+
+<h3 id="u3-q">Practice Questions — Bleeding & Clotting</h3>
+
+<div class="q">
+<div class="qhead">Q10. A patient with thrombocytopenia develops prolonged bleeding after minor injury. Which mechanism best explains the prolonged bleeding?</div>
+<div class="opts">A. Coagulation factor deficiency<br>B. Inadequate platelet plug formation due to low platelet count<br>C. Increased fibrinolysis<br>D. Endothelial cell dysfunction</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Platelets are the first responders to vessel injury, forming the primary hemostatic plug. With too few platelets, the plug doesn't form effectively and minor injuries bleed longer than expected.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q11. A patient with polycythemia develops increased risk of thrombosis. The best explanation is:</div>
+<div class="opts">A. Excess platelet count alone<br>B. Increased blood viscosity from elevated RBC mass slows flow and promotes clot formation<br>C. Hypoxia-induced vasodilation<br>D. Iron deficiency</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> More RBCs = thicker blood = slower flow + more platelet aggregation. Strokes, MIs, and DVTs are all more common in untreated polycythemia.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q12. A patient who has been immobile for several days develops thrombosis. Which Virchow's triad component most directly explains this?</div>
+<div class="opts">A. Endothelial injury alone<br>B. Venous stasis from prolonged immobility<br>C. Decreased hepatic clotting factor synthesis<br>D. Decreased platelet count</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Stasis is the dominant driver in immobile patients (though inflammation/hypercoagulability also play in). Early mobilization, compression devices, and prophylactic anticoagulation prevent this.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= UNIT 4 ========================= -->
+<section id="u4" class="unit4">
+<h2>Unit 4 &nbsp;•&nbsp; White Cell Disorders &nbsp;<span class="chip c4">LO2</span></h2>
+
+<h3 id="u4-neutro">4.1 Leukopenia and Neutropenia</h3>
+
+<div class="box mech">
+<b>Leukopenia</b> = WBC count &lt; 4,000/μL. <b>Neutropenia</b> = absolute neutrophil count (ANC) &lt; 1,500. <b>Severe neutropenia (ANC &lt; 500) is a medical emergency</b> for infection risk.
+</div>
+
+<p><b>Common causes:</b></p>
+<ul>
+  <li><b>Chemotherapy</b> — most common cause; nadir typically 7–14 days after dose</li>
+  <li>Radiation</li>
+  <li>Bone marrow infiltration (leukemia, lymphoma, metastases)</li>
+  <li>Aplastic anemia</li>
+  <li>Severe infections (paradoxically — sepsis can deplete neutrophils)</li>
+  <li>Autoimmune neutropenia</li>
+  <li>Drug-induced (clozapine, methimazole, others)</li>
+  <li>B12 / folate deficiency</li>
+</ul>
+
+<div class="box path">
+The neutropenic patient can have profound infection <b>without classic signs</b> because they cannot mount inflammation. <b>Fever may be the only sign.</b> Neutropenic fever requires immediate broad-spectrum IV antibiotics — even before culture results.
+</div>
+
+<h3 id="u4-leuk">4.2 Leukemia (Brief Recap from Week 3)</h3>
+
+<table>
+  <tr><th>Type</th><th>Age</th><th>Pattern</th></tr>
+  <tr><td><b>ALL</b> (acute lymphoblastic)</td><td>Children 2–5</td><td>Most common pediatric cancer; lymphoblasts crowd marrow</td></tr>
+  <tr><td><b>AML</b> (acute myeloid)</td><td>Adults</td><td>Myeloblasts; Auer rods on smear</td></tr>
+  <tr><td><b>CML</b> (chronic myeloid)</td><td>Middle-age adults</td><td>Philadelphia chromosome t(9;22), BCR-ABL fusion</td></tr>
+  <tr><td><b>CLL</b> (chronic lymphocytic)</td><td>Older adults</td><td>Often asymptomatic; smudge cells</td></tr>
+</table>
+
+<div class="box why">
+<b>Why leukemia patients get infections.</b> Even though the WBC count may look high on labs, those cells are <b>blasts</b> — immature, nonfunctional. The patient functionally has leukopenia. Marrow infiltration also crowds out normal hematopoiesis → anemia (fatigue, pallor) + thrombocytopenia (petechiae) + leukopenia (infections) all together.
+</div>
+
+<h3 id="u4-q">Practice Questions — White Cell Disorders</h3>
+
+<div class="q">
+<div class="qhead">Q13. A patient with leukopenia develops frequent infections. Which best explains this?</div>
+<div class="opts">A. Increased platelet aggregation<br>B. Decreased numbers of functional white blood cells (especially neutrophils) impair pathogen clearance<br>C. Reduced erythropoietin production<br>D. Enhanced antibody response</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Without enough neutrophils and other WBCs, the immune system can't clear bacteria, fungi, and other pathogens efficiently. Neutropenic fever requires immediate empirical antibiotics.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q14. A patient receiving chemotherapy develops a low white blood cell count. Best explanation?</div>
+<div class="opts">A. Chemotherapy specifically targets only WBCs<br>B. Chemotherapy is cytotoxic to rapidly dividing cells, including marrow precursors → decreased WBC production<br>C. Cytokine release directly destroys mature neutrophils<br>D. Reduced kidney EPO production</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Chemo doesn't discriminate well — it hits all rapidly dividing cells, including bone marrow precursors. Result: predictable cytopenias 7–14 days after dosing. Neutrophil nadir is the highest infection-risk window.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q15. A child with leukemia develops frequent infections. Which mechanism best explains this?</div>
+<div class="opts">A. The leukemic cells are functional and protect against infection<br>B. Marrow infiltration with leukemic blasts crowds out normal WBC production, and blasts themselves are nonfunctional<br>C. The patient is hypercoagulable<br>D. The patient is iron deficient</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Even with high "WBC counts" on labs, leukemic blasts can't fight infection, and the marrow can't make functional cells.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= UNIT 5 ========================= -->
+<section id="u5" class="unit5">
+<h2>Unit 5 &nbsp;•&nbsp; Pediatric Hematology &nbsp;<span class="chip c5">LO3</span></h2>
+
+<h3 id="u5-sickle">5.1 Sickle Cell Disease</h3>
+
+<div class="box mech">
+<b>Autosomal recessive</b> mutation in the β-globin gene → abnormal hemoglobin S (HbS). Under low O₂, acidosis, dehydration, or stress, HbS polymerizes, deforming RBCs into rigid, sickle-shaped cells. These cells:
+<ul>
+  <li>Block small vessels → <b>vaso-occlusive crises</b> → pain, organ ischemia</li>
+  <li>Are destroyed faster than normal → chronic hemolytic anemia</li>
+  <li>Damage the spleen by repeated infarctions → functional asplenia → susceptibility to encapsulated bacteria (S. pneumoniae, H. influenzae, Salmonella)</li>
+</ul>
+</div>
+
+<p><b>Classic features:</b></p>
+<ul>
+  <li>Recurrent severe pain crises (back, chest, extremities, abdomen)</li>
+  <li><b>Acute chest syndrome</b> — sickling in pulmonary vessels (medical emergency)</li>
+  <li>Splenic sequestration (acute drop in Hgb in young children)</li>
+  <li>Stroke (pediatric stroke risk significantly elevated)</li>
+  <li>Dactylitis (hand-foot swelling from infarction in small bones)</li>
+  <li>Chronic hemolytic anemia with elevated reticulocyte count</li>
+  <li>Increased gallstones (chronic bilirubin overload)</li>
+</ul>
+
+<div class="box tip">
+<b>Triggers of vaso-occlusive crisis:</b> dehydration, hypoxia, acidosis, infection, cold exposure, stress. Treat acutely with hydration, oxygen, pain control. Prevent with <b>hydroxyurea</b> (raises HbF, which doesn't sickle).
+</div>
+
+<h3 id="u5-neo">5.2 Neonatal Jaundice and Hemolytic Disease of the Newborn</h3>
+
+<div class="box mech">
+<b>Physiologic jaundice</b> appears <b>after 24 hours</b> of life and resolves within a week. It reflects the immature liver's limited ability to conjugate the bilirubin produced as fetal hemoglobin is broken down.<br>
+<b>Pathologic jaundice</b> appears <b>within 24 hours</b> of birth and signals abnormal hemolysis or other pathology. Unconjugated bilirubin can cross the BBB and cause <b>kernicterus</b> — irreversible neurologic damage.
+</div>
+
+<div class="box path">
+<b>Hemolytic disease of the newborn (HDN).</b> An Rh-negative mother previously sensitized to Rh-positive fetal blood (often during a prior pregnancy or delivery) makes IgG anti-Rh antibodies. In a subsequent Rh-positive pregnancy, these antibodies cross the placenta and destroy fetal RBCs → fetal anemia, jaundice, hydrops fetalis. <b>RhoGAM</b> (anti-D Ig given at 28 weeks and within 72 h of delivery) prevents maternal sensitization.
+</div>
+
+<div class="box why">
+<b>Why a newborn with jaundice within 24 hours is a red flag.</b> Physiologic jaundice can't appear that fast — it requires the neonatal liver to gradually fall behind. Within-24-hour jaundice means active hemolysis (HDN, ABO incompatibility, G6PD deficiency, sepsis). Don't wait.
+</div>
+
+<h4>Premature infant anemia</h4>
+<div class="box mech">
+Premature infants commonly develop anemia during their first weeks of life. Causes: shortened RBC lifespan, frequent blood draws (a substantial portion of small infants' blood volume), low EPO production by the immature kidney, rapid growth diluting Hgb. Often requires transfusion or supplemental EPO.
+</div>
+
+<h3 id="u5-q">Practice Questions — Pediatric Hematology</h3>
+
+<div class="q">
+<div class="qhead">Q16. A child with sickle cell disease develops recurrent painful crises. Which mechanism best explains the pain?</div>
+<div class="opts">A. Increased platelet count blocks vessels<br>B. Sickled RBCs occlude small blood vessels, causing tissue ischemia and pain<br>C. Increased RBC production overworks the marrow<br>D. Iron deficiency</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Vaso-occlusive crisis. Sickled cells are rigid and block microvasculature → ischemic pain. Triggers include dehydration, hypoxia, infection, cold, and stress. Hydration, O₂, pain control are mainstays.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q17. A newborn develops jaundice within 24 hours of birth. Which mechanism best explains this?</div>
+<div class="opts">A. Normal physiologic jaundice from immature liver<br>B. Pathologic hemolysis (e.g., HDN, ABO incompatibility, G6PD deficiency)<br>C. Healthy weight gain<br>D. Brown adipose tissue activation</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Within 24 hours = pathologic. Active hemolysis is the most common cause; check Rh and ABO status, hemolysis labs. Bilirubin crossing the BBB causes kernicterus.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q18. A newborn with hemolytic disease of the newborn develops anemia. The condition is best prevented by:</div>
+<div class="opts">A. Routine vitamin K injection<br>B. RhoGAM (anti-D immunoglobulin) given to Rh-negative mothers at 28 weeks and after delivery<br>C. Folic acid in the third trimester<br>D. Iron supplementation in pregnancy</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> RhoGAM binds and removes any fetal Rh-positive RBCs that have entered maternal circulation, preventing the mother from making lasting anti-Rh antibodies.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q19. A child with anemia develops increased heart rate and respiratory rate. Which mechanism best explains these compensatory changes?</div>
+<div class="opts">A. Loss of vagal tone unrelated to anemia<br>B. The body increases cardiac output and respiratory rate to compensate for reduced oxygen delivery<br>C. Iron toxicity<br>D. Vitamin overdose</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Anemia → reduced O₂ delivery → reflex sympathetic activation → ↑ HR + ↑ RR + ↑ stroke volume to maintain tissue oxygenation.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q20. A premature infant develops anemia during the first weeks of life. Which factor most directly contributes?</div>
+<div class="opts">A. Excessive iron intake<br>B. Low neonatal EPO production by the immature kidney plus shortened RBC lifespan and frequent blood draws<br>C. Increased erythropoiesis<br>D. Early gut microbiome</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> "Anemia of prematurity" — multifactorial: low EPO, fragile RBCs, blood loss from sampling, rapid growth diluting Hgb. May need transfusion or recombinant EPO.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q21. A child with chronic anemia develops an increased respiratory rate. Which mechanism best explains this change?</div>
+<div class="opts">A. Acidosis from kidney failure<br>B. Compensatory increase in ventilation to maximize oxygen uptake and delivery<br>C. Hyperventilation from anxiety only<br>D. Pulmonary embolism</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Chronic anemia → low tissue O₂ → chemoreceptor and central drive to breathe more, raising SaO₂ and total O₂ uptake.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q22. A child with anemia shows a compensatory rise in reticulocyte count. This finding indicates:</div>
+<div class="opts">A. The marrow is failing<br>B. The marrow is responding appropriately by ramping up RBC production<br>C. Hemolysis has been suppressed<br>D. Iron deficiency is ruled out</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Reticulocytes are immature RBCs newly released from marrow. A high count means the marrow recognizes the anemia and is responding. A low count in anemia means the marrow is failing.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= UNIT 6 ========================= -->
+<section id="u6" class="unit6">
+<h2>Unit 6 &nbsp;•&nbsp; Environmental & Systemic Effects &nbsp;<span class="chip c6">LO4</span></h2>
+
+<h3 id="u6-alt">6.1 High Altitude — Adaptive Polycythemia</h3>
+
+<div class="box mech">
+At high altitude, atmospheric O₂ partial pressure is lower → lower SaO₂ → tissue hypoxia. The body adapts:
+<ul>
+  <li><b>Acute:</b> hyperventilation increases SaO₂ partially</li>
+  <li><b>Days to weeks:</b> kidney releases EPO → bone marrow produces more RBCs → Hct rises</li>
+  <li><b>Right shift</b> of O₂-Hgb dissociation curve (↑ 2,3-BPG) → more O₂ unloaded to tissues</li>
+</ul>
+This is "secondary appropriate" polycythemia. It improves O₂ delivery but raises blood viscosity and thrombosis risk.
+</div>
+
+<h3>6.2 Radiation Exposure</h3>
+<div class="box path">
+Ionizing radiation damages rapidly dividing bone marrow precursors. Severe exposure → <b>aplastic anemia / pancytopenia</b>: low RBCs (anemia), low platelets (bleeding), low WBCs (infection). The marrow is hypocellular on biopsy. Treatment: supportive care, transfusions, growth factors, possible stem-cell transplant.
+</div>
+
+<h3>6.3 Environmental Toxins</h3>
+<p>Several environmental exposures damage the marrow or RBCs directly:</p>
+<ul>
+  <li><b>Benzene</b> — aplastic anemia, leukemia (refining, gasoline, plastics)</li>
+  <li><b>Lead</b> — microcytic anemia (interferes with heme synthesis), basophilic stippling, neurotoxicity in children</li>
+  <li><b>Radiation</b> — pancytopenia, leukemia</li>
+  <li><b>Pesticides, solvents</b> — variable marrow effects</li>
+</ul>
+
+<h3>6.4 Viral Infection and Anemia</h3>
+<div class="box mech">
+Some viral infections trigger systemic inflammation that decreases hemoglobin via the same <b>hepcidin-mediated</b> mechanism as anemia of chronic disease. Inflammatory cytokines suppress erythropoiesis and limit iron availability. The anemia is typically mild, normocytic, and resolves with the infection. Severe viral illness (<b>parvovirus B19</b>) can directly suppress RBC precursors, causing <b>transient aplastic crisis</b> — particularly dangerous in patients with chronic hemolysis like sickle cell disease.
+</div>
+
+<h3>6.5 Post-Donation Recovery</h3>
+<p>After whole-blood donation (~500 mL):</p>
+<ul>
+  <li>Plasma volume restores in 24–48 h via fluid intake and shift from interstitium</li>
+  <li>RBC mass recovers over 4–8 weeks via EPO-driven marrow erythropoiesis</li>
+  <li>Iron stores can take longer; iron supplementation often recommended for frequent donors</li>
+</ul>
+
+<h3 id="u6-q">Practice Questions — Environmental & Systemic</h3>
+
+<div class="q">
+<div class="qhead">Q23. Individuals living at high altitude develop hematologic changes. Which mechanism best explains this adaptation?</div>
+<div class="opts">A. Hypoxia stimulates renal EPO release, driving increased RBC production<br>B. Cold air increases bone marrow temperature<br>C. UV radiation directly produces RBCs<br>D. Lower atmospheric pressure compresses blood vessels</div>
+<details><summary>Show answer</summary><div class="ans"><b>A.</b> Same kidney-EPO-marrow axis seen in chronic hypoxia patients. Hct can rise significantly with prolonged altitude exposure.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q24. A patient exposed to radiation develops pancytopenia. Which best explains this?</div>
+<div class="opts">A. Radiation directly destroys mature RBCs in the circulation<br>B. Ionizing radiation damages rapidly dividing bone marrow precursors, reducing all blood cell lines<br>C. Radiation activates platelets to consume themselves<br>D. Radiation only affects red blood cells</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Marrow precursors are highly proliferative and very radiation-sensitive. Loss of stem and precursor cells → pancytopenia. Treatment requires marrow recovery, transfusions, and possibly stem cell transplant.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q25. A patient develops anemia following a viral infection that triggers systemic inflammation and decreases hemoglobin. The most likely mechanism is:</div>
+<div class="opts">A. Hepcidin elevation from inflammation locks iron in stores and suppresses erythropoiesis<br>B. Vitamin K deficiency<br>C. Acute hemolysis from antibody binding<br>D. Bone marrow tumor infiltration</div>
+<details><summary>Show answer</summary><div class="ans"><b>A.</b> Inflammation → IL-6 → hepcidin → iron sequestration + impaired erythropoiesis. Same anemia-of-chronic-disease mechanism applied to acute viral illness.</div></details>
+</div>
+
+<div class="q">
+<div class="qhead">Q26. A population exposed to environmental toxins develops anemia. Which exposure most directly causes microcytic anemia in children by interfering with heme synthesis?</div>
+<div class="opts">A. Benzene<br>B. Lead<br>C. Aluminum cookware<br>D. Carbon dioxide</div>
+<details><summary>Show answer</summary><div class="ans"><b>B.</b> Lead inhibits enzymes in heme synthesis (ALA dehydratase, ferrochelatase) → microcytic anemia with basophilic stippling. Children are especially vulnerable to neurotoxicity from environmental lead exposure.</div></details>
+</div>
+
+</section>
+
+<!-- ========================= APPENDIX ========================= -->
+<section id="appx">
+<h2 style="background:#374151;">Appendix &nbsp;•&nbsp; Top Missteps & Master Mnemonics</h2>
+
+<h3 style="color:#374151;border-bottom-color:#9ca3af;">Top 15 Week 8 Missteps</h3>
+<table>
+<tr><th>#</th><th>The trap</th><th>What's actually true</th></tr>
+<tr><td>1</td><td>"Microcytic anemia is B12 deficiency."</td><td>Microcytic = iron deficiency (or chronic disease, thalassemia). B12/folate = MACROcytic.</td></tr>
+<tr><td>2</td><td>"Anemia of chronic disease has low iron stores."</td><td>Iron stores are NORMAL or HIGH. The problem is iron is locked in macrophages by hepcidin.</td></tr>
+<tr><td>3</td><td>"Hemolytic anemia has low reticulocytes."</td><td>Hemolysis triggers HIGH reticulocytes (marrow trying to keep up).</td></tr>
+<tr><td>4</td><td>"B12 deficiency has no neurologic symptoms."</td><td>B12 is needed for myelin — paresthesias, ataxia. This is what distinguishes it from folate deficiency.</td></tr>
+<tr><td>5</td><td>"Thrombocytopenia causes deep joint bleeds."</td><td>Platelet problems = mucocutaneous (petechiae, gum bleeding). Hemarthroses = coagulation factor problems.</td></tr>
+<tr><td>6</td><td>"Polycythemia helps oxygen delivery without risk."</td><td>↑ Hct → ↑ viscosity → thrombosis risk (stroke, MI, DVT).</td></tr>
+<tr><td>7</td><td>"Newborn jaundice is always normal."</td><td>Within 24 hours = pathologic (hemolysis). Physiologic jaundice appears AFTER 24 hours.</td></tr>
+<tr><td>8</td><td>"RhoGAM is given to Rh-positive mothers."</td><td>RhoGAM is for Rh-negative mothers carrying potentially Rh-positive fetuses.</td></tr>
+<tr><td>9</td><td>"Sickle cell crisis is treated with diuretics."</td><td>Treat with HYDRATION (sickling worsens with dehydration), oxygen, and pain control.</td></tr>
+<tr><td>10</td><td>"Leukemia patients have functional WBCs."</td><td>Blasts are nonfunctional even when count looks high. Patients have functional leukopenia.</td></tr>
+<tr><td>11</td><td>"Chemotherapy WBC drop is unrelated to infection risk."</td><td>It IS the infection risk. Neutropenic fever requires immediate empirical antibiotics.</td></tr>
+<tr><td>12</td><td>"Thrombosis after immobility is rare."</td><td>Stasis is one of three Virchow drivers; immobility is a major DVT risk.</td></tr>
+<tr><td>13</td><td>"EPO comes from the bone marrow."</td><td>EPO comes from the kidneys (responding to hypoxia). Marrow is the target of EPO.</td></tr>
+<tr><td>14</td><td>"Phagocytes only eat dead cells."</td><td>Neutrophils and macrophages actively eat live invading bacteria — primary microbial killing.</td></tr>
+<tr><td>15</td><td>"Lead anemia is macrocytic."</td><td>Lead causes microcytic anemia by inhibiting heme synthesis enzymes; basophilic stippling on smear.</td></tr>
+</table>
+
+<h3 style="color:#374151;border-bottom-color:#9ca3af;">Master Mnemonic Sheet</h3>
+<table>
+<tr><th>Mnemonic</th><th>Meaning</th></tr>
+<tr><td><b>Micro = Iron / Chronic / Lead</b></td><td>Low MCV anemia categories</td></tr>
+<tr><td><b>Macro = B12 / Folate</b></td><td>High MCV anemia categories</td></tr>
+<tr><td><b>"B12 has neuro, folate doesn't"</b></td><td>Key differentiator between the two macrocytic anemias</td></tr>
+<tr><td><b>Hemolysis triad</b></td><td>↑ indirect bilirubin + ↑ LDH + ↓ haptoglobin + ↑ retics</td></tr>
+<tr><td><b>Virchow's triad</b></td><td>Endothelial injury + Stasis + Hypercoagulability</td></tr>
+<tr><td><b>Within 24 h jaundice = pathologic</b></td><td>Investigate hemolysis</td></tr>
+<tr><td><b>RhoGAM = Rh-NEG mom</b></td><td>Given at 28 weeks and within 72 h of delivery</td></tr>
+<tr><td><b>Sickle triggers = Cold, Hypoxia, Acidosis, Dehydration, Stress, Infection</b></td><td>Avoidance prevents crises</td></tr>
+<tr><td><b>Neutropenic fever = empirical antibiotics</b></td><td>Don't wait for cultures</td></tr>
+<tr><td><b>EPO from kidneys</b></td><td>Hypoxia sensor → marrow erythropoiesis driver</td></tr>
+<tr><td><b>Hepcidin = iron lockup</b></td><td>The hormone of anemia of chronic disease</td></tr>
+</table>
+
+<h3 style="color:#374151;border-bottom-color:#9ca3af;">Anemia Differential Quick Reference</h3>
+<table>
+<tr><th>Pattern</th><th>Most likely</th></tr>
+<tr><td>Microcytic + chronic blood loss</td><td>Iron deficiency</td></tr>
+<tr><td>Microcytic + chronic disease, normal/high ferritin</td><td>Anemia of chronic disease</td></tr>
+<tr><td>Microcytic + child with environmental exposure</td><td>Lead poisoning</td></tr>
+<tr><td>Macrocytic + glossitis + paresthesia</td><td>B12 deficiency</td></tr>
+<tr><td>Macrocytic + alcoholism or pregnancy</td><td>Folate deficiency</td></tr>
+<tr><td>Anemia + jaundice + ↑ indirect bilirubin + ↑ LDH</td><td>Hemolytic anemia</td></tr>
+<tr><td>Pancytopenia after radiation/chemo/benzene</td><td>Aplastic anemia</td></tr>
+<tr><td>Polycythemia at altitude or with COPD</td><td>Secondary appropriate (EPO-driven)</td></tr>
+<tr><td>Newborn with jaundice in first 24 h</td><td>Hemolytic disease (HDN, ABO, G6PD)</td></tr>
+<tr><td>Child with pain crises and chronic anemia</td><td>Sickle cell disease</td></tr>
+</table>
+
+<h3 style="color:#374151;border-bottom-color:#9ca3af;">Week 8 Study Strategy</h3>
+<ul>
+  <li><b>Read MCV first</b> on every anemia question. It splits the differential before you read another lab.</li>
+  <li><b>Pair every anemia type with its mechanism.</b> Iron = no heme. B12 = no DNA + no myelin. ACD = hepcidin lockup. Hemolytic = destruction. Aplastic = marrow gone.</li>
+  <li><b>Memorize the compensations cold.</b> ↑ HR, ↑ RR, ↑ EPO, right shift O₂-Hgb curve. SATA classics.</li>
+  <li><b>Don't mix bleeding patterns.</b> Mucocutaneous = platelet. Deep / hemarthroses = factor.</li>
+  <li><b>"Within 24 hours" jaundice in newborns is pathologic.</b> Don't pick the "physiologic" distractor.</li>
+  <li><b>Sickle cell triggers are extremely high yield</b> — dehydration, hypoxia, acidosis, infection, cold, stress.</li>
+  <li><b>Connect environmental exposures to mechanisms.</b> Altitude = EPO. Radiation = pancytopenia. Lead = microcytic. Benzene = aplastic / leukemia.</li>
+</ul>
+
+<p class="small" style="margin-top:16px;">SCI225 Week 8 Study Guide — built from the Week 8 learning objectives covering hematologic structure and function, anemias, bleeding and clotting disorders, white cell disorders, pediatric hematology, and environmental influences. Made by Dr. Vidya Aggrawal to teach the concepts tested, not the exam questions themselves. Same color-coded format as Weeks 1–6. Print for paper, or use in-browser with collapsible practice answers.</p>
+</section>
+
+</main>
+</div>
+</body>
+</html>
