@@ -2179,6 +2179,7 @@ body.deter-stage-3::after{box-shadow:inset 0 0 120px rgba(248,113,113,.55);anima
 <!-- EHR PATIENT BANNER -->
 <div class="ehr-banner">
 <button class="bb" onclick="cLeave()">✕ D/C</button>
+<button class="bb" onclick="stopSp();stopHeartMonitor();showCorr()" title="Back to the hallway">🚪 Hallway</button>
 <div class="ehr-pt"><span class="pt-name" id="en">--</span><span class="pt-demo" id="ed">--</span><span class="pt-mrn" id="eMRN">MRN: --</span></div>
 <div class="ehr-meta">
 <span class="ehr-tag allergy" id="eAllergy">NKDA</span>
@@ -8492,7 +8493,7 @@ window.doAct=function(actionId){
     a.href='../02_hub/index.html';
     a.title='Back to the campus map';
     a.innerHTML='\uD83D\uDDFA\uFE0F Map';
-    a.setAttribute('style','position:fixed;top:8px;left:8px;z-index:2147483646;'
+    a.setAttribute('style','position:fixed;bottom:14px;left:12px;z-index:2147483646;'
       +'font-family:\'Press Start 2P\',VT323,monospace,sans-serif;font-size:9px;'
       +'letter-spacing:1px;color:#f4c45a;background:rgba(10,16,32,.92);'
       +'border:1.5px solid #f4c45a;border-radius:8px;padding:7px 10px;'
