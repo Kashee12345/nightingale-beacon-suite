@@ -77,7 +77,8 @@ body::after {
 
 /* ═══ TITLE BANNER ═══ */
 #title-banner {
-  position:absolute; top:18px; left:50%; transform:translateX(-50%);
+  position:absolute; top:14px; left:50%; transform:translateX(-50%);
+  width: min(600px, 92vw);
   text-align:center; z-index:10; pointer-events:none;
   animation: title-fade-in 1.6s ease-out;
 }
@@ -87,7 +88,9 @@ body::after {
 }
 #title-banner h1 {
   font-family: var(--ng-font-disp);
-  font-size: clamp(28px, 5vw, 56px);
+  font-size: clamp(24px, 3.6vw, 40px);
+  line-height: 1.1;
+  margin: 0;
   color: var(--ng-lamp-gold);
   letter-spacing:2px;
   text-shadow: 0 0 24px rgba(244,196,90,.5), 0 0 4px rgba(244,196,90,.9), 0 4px 8px rgba(0,0,0,.7);
@@ -165,14 +168,17 @@ body::after {
 .course-label {
   margin-top:4px;
   font-family: var(--ng-font-read);
-  font-size:14px;
+  font-size:12px;
   color: var(--ng-text);
   background: rgba(14,27,58,.85);
-  padding:2px 8px;
+  padding:2px 7px;
   border-radius:3px;
   border: 1px solid rgba(244,196,90,.4);
-  white-space:nowrap;
-  letter-spacing:1px;
+  white-space:normal;
+  max-width:108px;
+  text-align:center;
+  line-height:1.12;
+  letter-spacing:.5px;
 }
 .course-code {
   font-family: var(--ng-font-pixel);
@@ -333,7 +339,7 @@ body::after {
 
 /* ═══ ACHIEVEMENT BAR ═══ */
 #achievement-bar {
-  position:absolute; top:90px; left:50%; transform:translateX(-50%);
+  position:absolute; top:auto; bottom:60px; left:50%; transform:translateX(-50%);
   display:flex; gap:8px; align-items:center;
   background: rgba(14,27,58,.85);
   border: 1.5px solid rgba(244,196,90,.5);
@@ -393,7 +399,7 @@ body::after {
 
 /* ═══ MOBILE ═══ */
 @media (max-width: 920px) {
-  #achievement-bar { top: 76px; padding: 4px 10px; gap: 5px; }
+  #achievement-bar { top: auto; bottom: 72px; padding: 4px 10px; gap: 5px; }
   .achievement-badge { font-size: 10px; }
   .achievement-badge .ach-ico { font-size: 14px; }
   #ach-header { font-size: 6px; padding-right: 5px; }
@@ -425,8 +431,8 @@ body::after {
   <div class="tagline">Change Lives. Beginning with Your Own.</div>
   <div class="divider"></div>
   <div class="subtitle">⚜ GENERAL EDUCATION CAMPUS · v3 ⚜</div>
-  <a href="beacon_general_overworld.html" style="display:inline-block;margin-top:12px;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:2px;color:#f4c45a;background:rgba(14,27,58,.8);border:1px solid #3d4a8f;border-radius:9px;padding:9px 13px;text-decoration:none;">🗺️ MAP VIEW · WALK THE CAMPUS</a>
 </div>
+<a href="beacon_general_overworld.html" style="position:fixed;top:14px;left:14px;z-index:60;pointer-events:auto;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:1.5px;color:#f4c45a;background:rgba(14,27,58,.92);border:1.5px solid #f4c45a;border-radius:6px;padding:9px 12px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.5);">🗺️ MAP VIEW</a>
 
 <!-- ═══ CENTERPIECE LAMP ═══ -->
 <div id="hub-lamp">
@@ -470,12 +476,12 @@ body::after {
   </svg>
 </div>
 
-<!-- ═══ AREA LABELS ═══ -->
-<div class="area-label" style="top:14%; left:50%; transform:translateX(-50%);">⁘ Sciences ⁘</div>
-<div class="area-label" style="top:50%; left:6%;">⁘ Math ⁘</div>
-<div class="area-label" style="top:50%; right:6%;">⁘ Humanities ⁘</div>
-<div class="area-label" style="bottom:14%; left:24%;">⁘ Communication ⁘</div>
-<div class="area-label" style="bottom:14%; right:24%;">⁘ Social Sciences ⁘</div>
+<!-- ═══ AREA LABELS — repositioned to screen edges so they never sit under a course pin ═══ -->
+<div class="area-label" style="top:30%; left:50%; transform:translateX(-50%);">⁘ Sciences ⁘</div>
+<div class="area-label" style="top:53%; left:3%;">⁘ Math ⁘</div>
+<div class="area-label" style="top:53%; right:3%;">⁘ Humanities ⁘</div>
+<div class="area-label" style="top:62%; left:8%;">⁘ Communication ⁘</div>
+<div class="area-label" style="top:62%; right:6%;">⁘ Social Sciences ⁘</div>
 
 <!-- ═══ ACHIEVEMENT BAR ═══ -->
 <div id="achievement-bar">
@@ -500,10 +506,7 @@ body::after {
   <div class="stat-cell"><span class="stat-val" id="stat-questions">0 / 5000</span><span class="stat-label">Questions</span></div>
 </div>
 
-<!-- ═══ PATIENT PIN ═══ -->
-<div id="patient-pin" onclick="openPatientChart()" title="View continuity patient chart">
-  <span class="ico">📋</span><span>Mrs. Eleanor Vance · Chart</span>
-</div>
+<!-- (Continuity-patient pill removed per design; MAP VIEW button now occupies the top-left.) -->
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -515,12 +518,14 @@ body::after {
    and the launcher can never drift apart again. Radial map positions live here
    (the catalog is layout-agnostic); everything else comes from the catalog. */
 const NODE_POS = {
-  sci220:[38,22], sci221:[50,18], sci225:[62,22], sci251:[30,30], sci131:[70,30],
-  drvidya:[50,31],
-  mat100:[14,42], mat220:[14,58],
-  hum110:[86,42], hum301:[86,58],
-  eng120:[24,74], eng311:[36,80], com301:[48,74],
-  psy201:[60,74], psy201lab:[58,84], psy300:[70,80], soc220:[80,74], ant300:[88,74]
+  sci221:[50,13],
+  sci220:[34,20], sci225:[66,20],
+  sci251:[19,29], sci131:[81,29],
+  drvidya:[38,33], mystery:[62,33],
+  mat100:[12,45], mat220:[12,61],
+  hum110:[88,45], hum301:[88,61],
+  eng120:[19,70], com301:[37,70], eng311:[28,80],
+  psy201:[55,70], soc220:[72,70], ant300:[88,70], psy300:[68,80], psy201lab:[50,80]
 };
 const AREA_COLOR = {};
 (window.NG_CATALOG.areas || []).forEach(function(a){ AREA_COLOR[a.id] = a.color; });
